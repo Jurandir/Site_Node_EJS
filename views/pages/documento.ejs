@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <%- include('../partials/head'); %>
 </head>
@@ -12,6 +12,7 @@
     <main>
         <div class="jumbotron">
             <h1>Documento</h1>
+            <h5><%= empresa %></h5>
 
             <form action="/documento/check" method="POST">
                 <div class="form-group"> 
@@ -27,7 +28,7 @@
                      <div class="form-group row">
                             <label for="numero" class="col-md-4 col-form-label text-md-right">Número</label>
                             <div class="col-md-6">
-                                <input type="number" class="form-control" required id="numero" name="numero" value="<%= numero %>" placeholder="Numero do documento">
+                                <input type="text" class="form-control" required id="numero" name="numero" value="<%= numero %>" placeholder="Numero do documento">
                             </div>
                      </div>
 

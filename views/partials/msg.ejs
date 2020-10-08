@@ -1,0 +1,27 @@
+<%if (msg_success.length>0) { %>
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Sucesso:</strong> <%= msg_success %>
+    </div>
+<% } %>
+
+<%if (msg_info.length>0) { %>
+    <div class="alert alert-info alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Mensagem:</strong> <%= msg_info %>
+    </div>
+<% } %>
+
+<%if (msg_warning.length>0) { %>
+    <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Alerta:</strong> <%= msg_warning %>
+    </div>
+<% } %>
+
+<%if (msg_danger.length>0) { %>
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Erro:</strong> <%= msg_danger %>
+</div>
+<% } %>
