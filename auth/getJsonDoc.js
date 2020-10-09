@@ -10,9 +10,9 @@ const getJsonDoc = async (cnpj,numero,serie,token) => {
     }
     try {
         let ret = await axios.post(url,  bodyParameters, config)
-        return { dados : ret.data, isAuthError: false}
+        return { dados : ret.data, isErr: false}
     } catch (err) { 
-        return {err, isAuthError: true, url: url };
+        return {err, isErr: true, url: url };
     }
 }
 

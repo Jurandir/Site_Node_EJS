@@ -64,11 +64,11 @@ router.post('/documento/check', function(req, res, next ) {
         res.redirect('/documento')    
     }
     
-    console.log('SESSION :',req.session)
-    console.log('COOKIES :',req.cookies)
+    //console.log('SESSION :',req.session)
+    //console.log('COOKIES :',req.cookies)
 
     let token = req.cookies.token
-    console.log('PARAMETROS :',cnpj,numero,serie,token)
+    //console.log('PARAMETROS :',cnpj,numero,serie,token)
 
     getJsonDoc(cnpj,numero,serie,token)
         .then((ret)=>{
@@ -80,7 +80,7 @@ router.post('/documento/check', function(req, res, next ) {
                 let dados           = ret.dados
                 req.session.res_json = dados
 
-                console.log('RETORNO :',dados)
+                //console.log('RETORNO :',dados)
 
                 let docs = `{"P1":"${cnpj}","P2":"${numero}","P3":"${serie}"}`
                 res.cookie('doc', docs)

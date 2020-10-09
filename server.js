@@ -48,8 +48,8 @@ app.use((req, res, next) => {
 app.use('/', rotas ) 
 
 // Serviço
-const port = process.env.PORT || '8080'
-const modo = process.env.NODE_ENV || 'Test'
+const port = process.env.PORT || '5001'
+const modo = process.env.NODE_ENV || 'Developer'
 
 app.listen(port, function () {
     console.log(`Servidor rodando na porta ${port} : Modo ${modo}`)
