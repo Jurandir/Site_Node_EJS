@@ -186,4 +186,95 @@ router.post('/login/check', function(req, res, next ) {
     }
 })
 
+
+// FORM - Posição da Carga API
+router.get('/posicaocarga', (req, res) => {
+
+    const { auth } = req.session
+    if (!auth) {
+        req.flash('msg_warning', 'Rediresionado - Usuário sem autenticação. !!!!')
+        req.session.auth = false
+        res.redirect('/login')    
+    } 
+
+    res.render('pages/posicaocarga', {
+        empresa: req.session.empresa,
+        cnpj: req.session.cnpj,
+        data_ini: null,
+        data_fim: null
+    })
+})
+
+// CHECK - Posição da Carga API
+router.post('/posicaocarga/check', function(req, res, next ) {
+    const { cnpj, data_ini, data_fim  } = req.body
+    const { auth } = req.session
+    const url_base = '/posicaocarga'
+    const url_result = '/posicaocargaresult'
+
+    if (!auth) {
+        req.session.auth = false
+        req.flash('msg_warning', 'Ocorreu uma falha na autenticação !!!!')
+        res.redirect('/login')    
+    } 
+
+    if (!data_ini) {
+        req.flash('msg_warning', 'Data inicial invalida !!!')
+        res.redirect( url_base )   
+    }     
+
+    if (!data_fim) {
+        req.flash('msg_warning', 'Data final invalida !!!')
+        res.redirect( url_base )   
+    }     
+
+    if (!cnpj) {
+        req.flash('msg_warning', 'CNPJ ou CPF invalidos !!!!')
+        res.redirect( url_base )    
+    }
+    
+    let token = req.cookies.token
+
+    getPosicaoCargas(cnpj,data_ini,data_fim,token) 
+        .then((ret)=>{
+            if (ret.isErr) {
+                req.flash('msg_danger', 'Erro na requisição a API !!!')
+                res.redirect( url_base )    
+            } else {     
+
+                let dados           = ret.dados
+                req.session.res_json = dados
+
+                //console.log('RETORNO :',dados)
+
+                let docs = `{"P1":"${cnpj}","P2":"${numero}","P3":"${serie}"}`
+                res.cookie('doc', docs)
+                req.session.cnpj = cnpj
+                res.redirect( url_result )           
+
+            }            
+        }).catch((err)=> {
+            req.flash('msg_danger', 'Problemas com o acesso a API !!!!')
+            console.log('ERROR :',err)
+        })
+})
+
+// SHOW - Resultado Posição de Carga API
+router.get('/posicaocargaresult', (req, res) => {
+    const { doc }  = req.cookies
+    let docs = JSON.parse( doc )
+
+    let res_json = JSON.stringify(req.session.res_json, null,"\t")
+
+    res.render('pages/posicaocargaresult', {
+        empresa: req.session.empresa,
+        cnpj: docs.P1,
+        numero: docs.P2,
+        serie: docs.P3,
+        texto: res_json
+    })
+})
+
+
+
 module.exports = router
