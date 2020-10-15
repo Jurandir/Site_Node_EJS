@@ -1,6 +1,7 @@
 const express                 = require('express')
 const getToken                = require('../auth/getToken')
 const getJsonDoc              = require('../auth/getJsonDoc')
+const getPosicaoCargas        = require('../auth/getPosicaoCargas')
 const { JSONCookie } = require('cookie-parser')
 const router                  = express.Router()
 
@@ -64,11 +65,7 @@ router.post('/documento/check', function(req, res, next ) {
         res.redirect('/documento')    
     }
     
-    //console.log('SESSION :',req.session)
-    //console.log('COOKIES :',req.cookies)
-
     let token = req.cookies.token
-    //console.log('PARAMETROS :',cnpj,numero,serie,token)
 
     getJsonDoc(cnpj,numero,serie,token)
         .then((ret)=>{
@@ -79,8 +76,6 @@ router.post('/documento/check', function(req, res, next ) {
 
                 let dados           = ret.dados
                 req.session.res_json = dados
-
-                //console.log('RETORNO :',dados)
 
                 let docs = `{"P1":"${cnpj}","P2":"${numero}","P3":"${serie}"}`
                 res.cookie('doc', docs)
@@ -206,11 +201,10 @@ router.get('/posicaocarga', (req, res) => {
 })
 
 // CHECK - Posição da Carga API
-router.post('/posicaocarga/check', function(req, res, next ) {
-    const { cnpj, data_ini, data_fim  } = req.body
+router.post('/posicaocarga/lista', function(req, res, next ) {
+    const { data_ini, data_fim  } = req.body
     const { auth } = req.session
     const url_base = '/posicaocarga'
-    const url_result = '/posicaocargaresult'
 
     if (!auth) {
         req.session.auth = false
@@ -227,15 +221,10 @@ router.post('/posicaocarga/check', function(req, res, next ) {
         req.flash('msg_warning', 'Data final invalida !!!')
         res.redirect( url_base )   
     }     
-
-    if (!cnpj) {
-        req.flash('msg_warning', 'CNPJ ou CPF invalidos !!!!')
-        res.redirect( url_base )    
-    }
-    
+ 
     let token = req.cookies.token
 
-    getPosicaoCargas(cnpj,data_ini,data_fim,token) 
+    getPosicaoCargas(data_ini,data_fim,token) 
         .then((ret)=>{
             if (ret.isErr) {
                 req.flash('msg_danger', 'Erro na requisição a API !!!')
@@ -244,14 +233,11 @@ router.post('/posicaocarga/check', function(req, res, next ) {
 
                 let dados           = ret.dados
                 req.session.res_json = dados
-
-                //console.log('RETORNO :',dados)
-
-                let docs = `{"P1":"${cnpj}","P2":"${numero}","P3":"${serie}"}`
-                res.cookie('doc', docs)
-                req.session.cnpj = cnpj
-                res.redirect( url_result )           
-
+              
+                res.render('pages/posicaocargaresult', {
+                    empresa: req.session.empresa,
+                    dados: dados
+                })                
             }            
         }).catch((err)=> {
             req.flash('msg_danger', 'Problemas com o acesso a API !!!!')
@@ -260,21 +246,14 @@ router.post('/posicaocarga/check', function(req, res, next ) {
 })
 
 // SHOW - Resultado Posição de Carga API
-router.get('/posicaocargaresult', (req, res) => {
-    const { doc }  = req.cookies
-    let docs = JSON.parse( doc )
+router.get('/posicaocarga/ctrc', (req, res) => {
+    const { dados }  = req.query
 
-    let res_json = JSON.stringify(req.session.res_json, null,"\t")
+    var itens = JSON.parse(dados)
+    itens.empresa = req.session.empresa
 
-    res.render('pages/posicaocargaresult', {
-        empresa: req.session.empresa,
-        cnpj: docs.P1,
-        numero: docs.P2,
-        serie: docs.P3,
-        texto: res_json
-    })
+    res.render('pages/posicaocargactrc', itens )
 })
-
 
 
 module.exports = router

@@ -14,28 +14,21 @@
             <h1>Posicao da Carga </h1>
             <h5><%= empresa %></h5>
 
-            <form action="/posicaocarga/check" method="POST">
+            <form action="/posicaocarga/lista" method="POST">
                 <div class="form-group"> 
                     <div class="card-body">
                       
-                      <div class="form-group row">
-                            <label for="cnpj" class="col-md-4 col-form-label text-md-right">CNPJ ou CPF</label>
-                            <div class="col-md-6">
-                                <input type="number" class="form-control" required autofocus id="cnpj" name="cnpj" value="<%= cnpj %>" placeholder="CNPJ ou CPF">
-                            </div>
-                     </div>
-
                      <div class="form-group row">
                             <label for="data_ini" class="col-md-4 col-form-label text-md-right">Data Inicial</label>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <input type="date" class="form-control" required id="data_ini" name="data_ini" value="<%= data_ini %>" placeholder="Data Inicial">
                             </div>
                      </div>
 
                      <div class="form-group row">
                             <label for="data_fim" class="col-md-4 col-form-label text-md-right">Data Final</label>
-                            <div class="col-md-6">
-                                <input type="date" class="form-control" id="data_fim" name="data_fim" value="<%= data_fim %>" placeholder="Data Final">
+                            <div class="col-md-3">
+                                <input type="date" class="form-control" required id="data_fim" name="data_fim" value="<%= data_fim %>" placeholder="Data Final">
                             </div>
                     </div>
 
@@ -43,7 +36,7 @@
 
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right"></label>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <input type="submit" class="btn btn-block btn-primary" value="Pesquisa">
                         </div>
                     </div>

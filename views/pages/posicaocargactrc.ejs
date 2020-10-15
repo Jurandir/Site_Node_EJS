@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>CTRC</h1>
+            <h5><%= empresa %></h5>
+                     
+                <div class="row">
+                        <label for="conhecimento" class="col-md-2 col-form-label text-md-right">Conhecimento</label>
+                        <div class="col-md-3">
+                            <input type="text" readonly class="form-control" id="conhecimento" name="conhecimento" value="<%= CONHECIMENTO %>" placeholder="Conhecimento">
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="text-md-right">Notas Fiscais</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" readonly class="form-control" id="NF" name="NF" value="<%= NF %>" placeholder="Notas Fiscais">
+                        </div>
+                </div>
+
+                <div class="row">
+                        <label for="remetente" class="col-md-2 col-form-label text-md-right">Remetente</label>
+                        <div class="col-md-9">
+                            <input type="text" readonly class="form-control" id="remetente" name="remetente" value="<%= REMETENTE %>" placeholder="Remetente">
+                        </div>
+                </div>
+
+                <div class="row">
+                    <label for="destinatario" class="col-md-2 col-form-label text-md-right">Destinatário</label>
+                    <div class="col-md-9">
+                        <input type="text" readonly class="form-control" id="destinatario" name="destinatario" value="<%= DESTINATARIO %>" placeholder="Destinatário">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label for="emitente" class="col-md-2 col-form-label text-md-right">Emitente</label>
+                    <div class="col-md-3">
+                        <input type="text" readonly class="form-control" id="emitente" name="emitente" value="<%= EMITENTE %>" placeholder="Emitente">
+                    </div>
+
+                    <div class="col-md-2">
+                        <label class="text-md-right">Trecho</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" readonly class="form-control" id="trecho" name="trecho" value="<%= TRECHO %>" placeholder="Trecho">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label for="chavecte" class="col-md-2 col-form-label text-md-right">Chave CT-e</label>
+                    <div class="col-md-9">
+                        <input type="text" readonly class="form-control" id="chavecte" name="chavecte" value="<%= CHAVECTE %>" placeholder="Chave CT-e">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label for="emissao" class="col-md-2 col-form-label text-md-right">Emissão</label>
+                    <div class="col-md-9">
+                        <input type="text" readonly class="form-control" id="emissao" name="emissao" value="<%= DATA %>" placeholder="Emissão">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <br>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                            <a href='/posicaocarga'>   
+                                <input type="button" class="btn btn-block btn-primary" value="Nova Pesquisa">
+                            </a>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="button" class="btn btn-block btn-primary" value="DCTE">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="button" class="btn btn-block btn-primary" value="XML">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="button" class="btn btn-block btn-primary" value="CT-e">
+                    </div>
+
+                </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script>
+        window.history.pushState("", "", "/posicaocarga/ctrc")
+    </script>
+
+</body>
+</html>
