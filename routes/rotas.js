@@ -2,6 +2,7 @@ const express                 = require('express')
 const getToken                = require('../auth/getToken')
 const getJsonDoc              = require('../auth/getJsonDoc')
 const getPosicaoCargas        = require('../auth/getPosicaoCargas')
+const getCteXML               = require('../auth/getCteXML')
 
 const getBaixarXML            = require('../services/getBaixarXML')
 const getDownload             = require('../services/getDownload')
@@ -277,9 +278,6 @@ router.get('/posicaocarga/ctrc', (req, res) => {
 router.get('/posicaocarga/download/dcte', (req, res) => {
     let { value } = req.query
 
-    console.log('Parametro:', value )
-    console.log('Session:', req.session )
-
     let empresa = value.substring(0,3)
     let serie   = value.substring(4,5)
     let ctrc    = value.substring(6,16)
@@ -315,5 +313,69 @@ router.get('/posicaocarga/download/dcte', (req, res) => {
 
     })
 })
+
+
+// DOWNLOAD - XML - Usa API Cliente
+router.get('/posicaocarga/download/xml', (req, res) => {
+    const { auth } = req.session
+    const url_base = '/posicaocarga'
+
+    let { value } = req.query
+
+    if (!auth) {
+        req.session.auth = false
+        req.flash('msg_warning', 'Ocorreu uma falha na autenticação !!!!')
+        res.redirect('/login')    
+    } 
+   
+    let empresa = value.substring(0,3)
+    let serie   = value.substring(4,5)
+    let ctrc    = value.substring(6,16)
+
+    if ((!empresa) || (!serie)  || (!ctrc)) {
+        req.flash('msg_warning', 'Dados invalidos !!!')
+        res.redirect( url_base )   
+    }     
+    
+    let token = req.cookies.token
+
+    getCteXML(empresa,serie,ctrc,token) 
+    .then((ret)=>{
+        if (ret.isErr) {
+            req.flash('msg_danger', 'Erro na requisição a API !!!')
+            res.redirect( url_base )    
+        } else {     
+
+            let dados           = ret.dados[0].XMLCTE
+            req.session.res_json = dados
+            
+            //console.log('DADOS:', dados )
+
+            const fileData = dados
+            const fileName = `${empresa}${ctrc}.XML`
+            const fileType = 'text/xml'
+          
+            res.writeHead(200, {
+              'Content-Disposition': `attachment; filename="${fileName}"`,
+              'Content-Type': fileType,
+            })
+          
+            const download = Buffer.from(fileData, 'utf-8')
+            res.end(download)
+          
+        }            
+    }).catch((err)=> {
+        req.flash('msg_danger', 'Problemas com o acesso a API !!!!')
+        res.redirect( url_base )   
+        console.log('ERROR :',err)
+    })
+})
+
+
+
+
+
+
+
 
 module.exports = router
