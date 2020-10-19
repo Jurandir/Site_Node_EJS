@@ -2,8 +2,17 @@ const express                 = require('express')
 const getToken                = require('../auth/getToken')
 const getJsonDoc              = require('../auth/getJsonDoc')
 const getPosicaoCargas        = require('../auth/getPosicaoCargas')
+
+const getBaixarXML            = require('../services/getBaixarXML')
+const getDownload             = require('../services/getDownload')
+
+const setCredencialCargas = require('../midwares/setCredencialCargas')
+
 const { JSONCookie } = require('cookie-parser')
 const router                  = express.Router()
+
+require('dotenv').config()
+
 
 // Verifica se está autenticado
 router.get('/', (req, res) => {
@@ -123,7 +132,7 @@ router.get('/login', function(req, res) {
 })
 
 // CHECK - Login
-router.post('/login/check', function(req, res, next ) {
+router.post('/login/check', setCredencialCargas,  function(req, res, next ) {
     
     let { cnpj, pwd } = req.body
     let { doc }       = req.cookies
@@ -152,7 +161,16 @@ router.post('/login/check', function(req, res, next ) {
         getToken(cnpj,pwd)
         .then((ret)=>{
             if (ret.isAuthError) {
-                req.flash('msg_danger', `Credênciais (${cnpj}/SENHA) fornecidas são invalidas !!!!`)
+
+                let { code,address,port } = ret.err
+
+                console.log( 'ACESSO:',code,address,port )
+
+                if (code =='ECONNREFUSED') {
+                    req.flash('msg_warning', `Servidor [${address}:${port}] não responde a requisição !!!!`)
+                } else {
+                    req.flash('msg_danger', `Credênciais (${cnpj}/SENHA) fornecidas são invalidas !!!!`)
+                }
                 res.redirect('/login')    
             } else {     
 
@@ -255,5 +273,47 @@ router.get('/posicaocarga/ctrc', (req, res) => {
     res.render('pages/posicaocargactrc', itens )
 })
 
+// DOWNLOAD - DCTE - Usa ServeSAC Fortes
+router.get('/posicaocarga/download/dcte', (req, res) => {
+    let { value } = req.query
+
+    console.log('Parametro:', value )
+    console.log('Session:', req.session )
+
+    let empresa = value.substring(0,3)
+    let serie   = value.substring(4,5)
+    let ctrc    = value.substring(6,16)
+    let iFatura = 0
+    let server = process.env.CARGAS_DOWNLOAD || 'http://192.168.0.93:9091'
+    let credencial = req.cookies.chave || '{1053E116-8BDE-4420-85AA-141792FF60CD}'
+
+    console.log('Aguardando Servidor:',server,'....')
+
+    getBaixarXML(credencial,empresa,serie,ctrc,iFatura ).then((resposta)=>{
+
+          console.log('getBaixarXML: $value=',resposta.return.$value)
+
+          let arq = resposta.return.$value
+          let file = arq.split('\\').join('/')
+          let download = `${server}/${file}`
+
+          file = `./downloads/DCTE_${ctrc}.ZIP`
+
+          getDownload(download, file, () => {
+                console.log('done')
+                res.download(file)
+          });
+     
+          req.flash('msg_info', 'Arquivo baixado com sucesso...')
+    
+    }).catch((err)=>{
+    
+            console.error('getBaixarXML:',err)
+            req.flash('msg_info', 'Servidor:'+server+' : '+err)
+            console.log('ERRO:',err)
+            res.redirect('/posicaocarga')
+
+    })
+})
 
 module.exports = router
