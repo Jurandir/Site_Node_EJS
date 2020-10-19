@@ -1,0 +1,16 @@
+
+
+/*
+getCredencialUSER('JURANDIR.J','******','11552312000710').then((y)=>{
+    console.log('getCredencialUSER:',y)
+})
+*/
+
+getCredencialCNPJ(14009276000145,41175).then((y)=>{
+    console.log('getCredencialCNPJ:',y)
+    return y
+}).then((credencial)=>{
+    getBaixarXML(credencial,empresa,serie,ctrc,iFatura ).then((x)=>{
+      console.log('getBaixarXML:',x)
+    })
+})
