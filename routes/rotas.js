@@ -6,6 +6,7 @@ const getCteXML               = require('../auth/getCteXML')
 
 const getBaixarXML            = require('../services/getBaixarXML')
 const getDownload             = require('../services/getDownload')
+const getImageEasydocs        = require('../services/getImageEasydocs')
 
 const setCredencialCargas = require('../midwares/setCredencialCargas')
 
@@ -372,10 +373,28 @@ router.get('/posicaocarga/download/xml', (req, res) => {
 })
 
 
+// DOWNLOAD - COMPROVANTE - Usa WS Easydocs
+router.get('/posicaocarga/download/easydocs', (req, res) => {
+    let { value } = req.query
 
+    let empresa = value.substring(0,3)
+    let ctrc    = value.substring(6,16)
 
+    console.log('Aguardando Servidor: EasyDocs')
 
+    getImageEasydocs(empresa,ctrc ).then((resposta)=>{
 
+          console.log('getImageEasydocs: $value=',resposta)
+    
+    }).catch((err)=>{
+    
+            console.error('getImageEasydocs:',err)
+            req.flash('msg_info', 'Servidor EasyDocs :'+err)
+            console.log('ERRO:',err)
+            res.redirect('/posicaocarga')
+
+    })
+})
 
 
 module.exports = router
