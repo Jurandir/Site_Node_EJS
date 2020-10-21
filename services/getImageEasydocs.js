@@ -1,14 +1,19 @@
 const axios = require('axios')
+require('dotenv').config();
 
-const getImageEasydocs = async (empresa,numero) => {
-  const url         = 'http://batchimageintegration.easydocs.com.br/Service/wsimagens.asmx?WSDL'
-  const CodEasydocs = 160
-  let montaBody     = (empresa,numero) => `
+const url = process.env.EASYDOCS_SOAP_URL
+
+const getImageEasydocs = async (emp,num) => {
+  
+  const empresa = emp
+  const numero = num
+
+  let bodyParameters = `
   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
   <soapenv:Header/>
   <soapenv:Body>
       <tem:Recupera_ImagemQtd>
-          <tem:CodigoCliente>${CodEasydocs}</tem:CodigoCliente>
+          <tem:CodigoCliente>160</tem:CodigoCliente>
           <tem:ListaImagens>
               <tem:EImagemKey>
               <tem:CodigoFilial>${empresa}</tem:CodigoFilial>
@@ -21,6 +26,9 @@ const getImageEasydocs = async (empresa,numero) => {
   </soapenv:Body>
   </soapenv:Envelope>
 `
+
+  console.log("bodyParameters",bodyParameters)
+
   const config = {
     headers: { 
         "Content-Type": "text/xml;charset=UTF-8",
@@ -28,7 +36,6 @@ const getImageEasydocs = async (empresa,numero) => {
         "Accept": "*/*"
         }
     }
-  const bodyParameters = montaBody(empresa,numero)
     
     try {
         let ret = await axios.post(url,  bodyParameters, config)
@@ -40,19 +47,33 @@ const getImageEasydocs = async (empresa,numero) => {
         const regexEmpresa = /<CodEmpresa>(.+?)<\/CodEmpresa>/
         const regexFilial  = /<CodigoFilial>(.+?)<\/CodigoFilial>/
         const regexImagem  = /<Imagem>(.+?)<\/Imagem>/
-
-        const matchNumero  = regexNumero.exec(xml)
-        const matchEmpresa = regexEmpresa.exec(xml)
-        const matchFilial  = regexFilial.exec(xml)
-        const matchImagem  = regexImagem.exec(xml)
+        const regexRetorno = /<Retorno>(.+?)<\/Retorno>/
         
-        const result = {
-            CodEmpresa: `${matchEmpresa[1]}`,
-            CodigoFilial: `${matchFilial[1]}`,
-            NumeroConhecimento: `${matchNumero[1]}`,
-            Imagem: `${matchImagem[1]}`,
-            isErr: false
-        }    
+
+        const matchNumero   = regexNumero.exec(xml)
+        const matchEmpresa  = regexEmpresa.exec(xml)
+        const matchFilial   = regexFilial.exec(xml)
+        const matchImagem   = regexImagem.exec(xml)
+        const matchRetorno  = regexRetorno.exec(xml)
+
+        
+        let result = {
+            "CodEmpresa": `${matchEmpresa[1]}`,
+            "CodigoFilial": `${matchFilial[1]}`,
+            "NumeroConhecimento": `${matchNumero[1]}`,
+            "isErr": false
+        }  
+
+        console.log('Retorno:',matchRetorno[1])
+
+        if (matchRetorno[1] == 'false') {
+            result.Imagem = ''
+            result.Retorno = false
+        } else {    
+            result.Imagem = `${matchImagem[1]}`
+            result.Retorno = true
+        }
+        
         return result
         
     } catch (err) { 

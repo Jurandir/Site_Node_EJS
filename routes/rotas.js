@@ -385,6 +385,15 @@ router.get('/posicaocarga/download/easydocs', (req, res) => {
     getImageEasydocs(empresa,ctrc ).then((resposta)=>{
 
           console.log('getImageEasydocs: $value=',resposta)
+
+          if (resposta.isErr) {
+                req.flash('msg_danger', 'Problemas com a consulta a API !!!!')
+                console.log('ERROR :',resposta)
+                res.redirect('/posicaocarga')
+          } else {
+            req.flash('msg_info', 'Ação realizada com sucesso !!!')
+            res.redirect('/posicaocarga/download/easydocs')
+          }    
     
     }).catch((err)=>{
     
