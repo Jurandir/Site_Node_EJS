@@ -16,4 +16,5 @@ const getJsonDoc = async (cnpj,numero,serie,token) => {
     }
 }
 
+
 module.exports = getJsonDoc
