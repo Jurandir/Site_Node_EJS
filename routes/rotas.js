@@ -10,6 +10,8 @@ const getImageEasydocs        = require('../services/getImageEasydocs')
 
 const setCredencialCargas = require('../midwares/setCredencialCargas')
 
+const { base64encode, base64decode } = require('nodejs-base64')
+
 const { JSONCookie } = require('cookie-parser')
 const router                  = express.Router()
 
@@ -384,15 +386,30 @@ router.get('/posicaocarga/download/easydocs', (req, res) => {
 
     getImageEasydocs(empresa,ctrc ).then((resposta)=>{
 
-          console.log('getImageEasydocs: $value=',resposta)
+          console.log('getImageEasydocs: $value=',resposta.Retorno)
 
           if (resposta.isErr) {
                 req.flash('msg_danger', 'Problemas com a consulta a API !!!!')
                 console.log('ERROR :',resposta)
                 res.redirect('/posicaocarga')
           } else {
+                if (resposta.Retorno) {
+                    let fileData = base64decode(resposta.Imagem)
+                    let fileName = `Img_${empresa}${ctrc}.BMP`
+                    let fileType = 'image/bmp'
+            
+                res.writeHead(200, {
+                'Content-Disposition': `attachment; filename="${fileName}"`,
+                'Content-Type': fileType,
+                })
+            
+                const download = Buffer.from(fileData, 'binary')
+                res.end(download)
+                }   
+
+
             req.flash('msg_info', 'Ação realizada com sucesso !!!')
-            res.redirect('/posicaocarga/download/easydocs')
+            res.redirect('/posicaocarga')
           }    
     
     }).catch((err)=>{
