@@ -10,7 +10,7 @@ const rootCheck = (req, res) => {
         req.session.auth = false
         res.redirect('/login')    
     } else {
-        res.redirect('/documento')    
+        res.redirect('/posicaocarga')    
     }
 }    
 

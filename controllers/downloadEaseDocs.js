@@ -14,7 +14,7 @@ const downloadEaseDocs = (req, res) => {
           console.log('getImageEasydocs: Tem Imagem?',resposta.Retorno)
 
           if (resposta.isErr) {
-                req.flash('msg_danger', 'Problemas com a consulta a API !!!!')
+                req.flash('msg_danger', 'Problemas com a consulta a API (EasyDocs) !!!!')
                 console.log('getImageEasydocs: API Easedocs ERROR :',resposta)
                 res.redirect('/posicaocarga')
           } else {

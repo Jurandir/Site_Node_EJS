@@ -19,8 +19,6 @@ app.use(bodyParser.urlencoded( { extended: true } ))
 app.use(bodyParser.json())
 app.use('/public', express.static(__dirname + '/public'))
 
-console.log(__dirname + '/public')
-
 app.use(session({
     key: 'user_sid',
     secret: 'somerandonstuffs',
@@ -41,6 +39,8 @@ app.use((req, res, next) => {
     res.locals.msg_warning   = req.flash("msg_warning")
     res.locals.empresa       = ''
     res.locals.login         = ''
+    res.locals.login         = ''
+
     next()
 })
 

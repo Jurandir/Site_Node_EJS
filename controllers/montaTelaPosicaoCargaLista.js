@@ -13,7 +13,10 @@ const montaTelaPosicaoCargaLista = (req, res, next ) => {
         req.flash('msg_warning', 'Data final invalida !!!')
         res.redirect( url_base )   
     }     
- 
+    
+    req.session.data_ini = data_ini
+    req.session.data_fim = data_fim
+
     let token = req.cookies.token
 
     getPosicaoCargas(data_ini,data_fim,token) 

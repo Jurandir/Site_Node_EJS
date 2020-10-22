@@ -17,6 +17,9 @@ const checkLogin = (req, res, next ) => {
         req.session.cnpj = ''
         req.session.user = ''
         req.session.empresa = ''
+        req.session.data_ini = new Date()
+        req.session.data_fim = new Date()
+    
         req.session.res_json = 'Teste de texto'
         req.flash('msg_warning', 'Dados obrigatorios para acesso !!!!')
         res.redirect('/login')    
@@ -58,7 +61,7 @@ const checkLogin = (req, res, next ) => {
                 docs = `{"P1":"${cnpj}","P2":"${numero}","P3":"${serie}"}`
                 res.cookie('doc', docs)
 
-                res.redirect('/documento')
+                res.redirect('/posicaocarga')
             }            
         }).catch((err)=> {
             req.flash('msg_danger', 'Problemas com o acesso a API !!!!')
