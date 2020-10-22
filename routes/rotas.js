@@ -384,15 +384,15 @@ router.get('/posicaocarga/download/easydocs', (req, res) => {
     let empresa = value.substring(0,3)
     let ctrc    = value.substring(6,16)
 
-    console.log('Aguardando Servidor: EasyDocs')
+    console.log('Aguardando Servidor: EasyDocs....')
 
     getImageEasydocs(empresa,ctrc ).then((resposta)=>{
 
-          console.log('getImageEasydocs: $value=',resposta.Retorno)
+          console.log('getImageEasydocs: Tem Imagem?',resposta.Retorno)
 
           if (resposta.isErr) {
                 req.flash('msg_danger', 'Problemas com a consulta a API !!!!')
-                console.log('ERROR :',resposta)
+                console.log('getImageEasydocs: API Easedocs ERROR :',resposta)
                 res.redirect('/posicaocarga')
           } else {
                 if (resposta.Retorno) {
@@ -400,18 +400,13 @@ router.get('/posicaocarga/download/easydocs', (req, res) => {
                     let base64Str   =  `${resposta.Imagem}`
                     let path        ='./downloads';
                     let optionalObj = {'fileName': fileName, 'type':'png'}
+                    let arq         = `${path}/${fileName}.png`                  
+                    let buff        = new Buffer.from(base64Str, 'base64')
 
-                    let arq = `${path}/${fileName}.png`
-                    
-                    let buff = new Buffer.from(base64Str, 'base64')
                     fs.writeFileSync(arq , buff)
-                    
-                    
                     console.log('FILE:',arq)
 
-
                     res.download(arq)
-
                 }   
 //            req.flash('msg_info', 'Ação realizada com sucesso !!!')
 //            res.redirect('/posicaocarga')
@@ -421,7 +416,6 @@ router.get('/posicaocarga/download/easydocs', (req, res) => {
             req.flash('msg_info', 'Servidor EasyDocs :'+err)
             console.log('getImageEasydocs - ERRO:',err)
             res.redirect('/posicaocarga')
-
     })
 })
 

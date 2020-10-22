@@ -26,9 +26,6 @@ const getImageEasydocs = async (emp,num) => {
   </soapenv:Body>
   </soapenv:Envelope>
 `
-
-  console.log("bodyParameters",bodyParameters)
-
   const config = {
     headers: { 
         "Content-Type": "text/xml;charset=UTF-8",
