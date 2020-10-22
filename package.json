@@ -21,7 +21,6 @@
     "express-session": "^1.17.1",
     "fs": "0.0.1-security",
     "morgan": "^1.10.0",
-    "nodejs-base64": "^1.0.3",
     "request": "^2.88.2",
     "soap": "^0.33.0"
   },

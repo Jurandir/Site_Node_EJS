@@ -41,7 +41,7 @@ const getImageEasydocs = async (emp,num) => {
         let ret = await axios.post(url,  bodyParameters, config)
 
         // Resposta da API SOAP da Easydocs
-        const xml = ret.data
+        const xml = decodeURI(ret.data)
 
         const regexNumero  = /<NumeroConhecimento>(.+?)<\/NumeroConhecimento>/
         const regexEmpresa = /<CodEmpresa>(.+?)<\/CodEmpresa>/

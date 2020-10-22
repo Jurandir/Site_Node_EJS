@@ -10,7 +10,9 @@ const getImageEasydocs        = require('../services/getImageEasydocs')
 
 const setCredencialCargas = require('../midwares/setCredencialCargas')
 
-const { base64encode, base64decode } = require('nodejs-base64')
+// const { base64encode, base64decode } = require('nodejs-base64')
+// const base64ToImage = require('base64-to-image')
+const fs            = require('fs')
 
 const { JSONCookie } = require('cookie-parser')
 const router                  = express.Router()
@@ -394,29 +396,30 @@ router.get('/posicaocarga/download/easydocs', (req, res) => {
                 res.redirect('/posicaocarga')
           } else {
                 if (resposta.Retorno) {
-                    let fileData = base64decode(resposta.Imagem)
-                    let fileName = `Img_${empresa}${ctrc}.BMP`
-                    let fileType = 'image/bmp'
-            
-                res.writeHead(200, {
-                'Content-Disposition': `attachment; filename="${fileName}"`,
-                'Content-Type': fileType,
-                })
-            
-                const download = Buffer.from(fileData, 'binary')
-                res.end(download)
+                    let fileName    = `Img_${empresa}${ctrc}`
+                    let base64Str   =  `${resposta.Imagem}`
+                    let path        ='./downloads';
+                    let optionalObj = {'fileName': fileName, 'type':'png'}
+
+                    let arq = `${path}/${fileName}.png`
+                    
+                    let buff = new Buffer.from(base64Str, 'base64')
+                    fs.writeFileSync(arq , buff)
+                    
+                    
+                    console.log('FILE:',arq)
+
+
+                    res.download(arq)
+
                 }   
-
-
-            req.flash('msg_info', 'Ação realizada com sucesso !!!')
-            res.redirect('/posicaocarga')
+//            req.flash('msg_info', 'Ação realizada com sucesso !!!')
+//            res.redirect('/posicaocarga')
           }    
     
-    }).catch((err)=>{
-    
-            console.error('getImageEasydocs:',err)
+    }).catch((err)=>{ 
             req.flash('msg_info', 'Servidor EasyDocs :'+err)
-            console.log('ERRO:',err)
+            console.log('getImageEasydocs - ERRO:',err)
             res.redirect('/posicaocarga')
 
     })
