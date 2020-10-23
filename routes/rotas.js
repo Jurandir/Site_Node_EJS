@@ -15,11 +15,16 @@ const montaTelaPosicaoCargaLista = require('../controllers/montaTelaPosicaoCarga
 const setCredencialCargas        = require('../midwares/setCredencialCargas')
 const chacaLogado                = require('../midwares/chacaLogado')
 
+const montaTelaPosicaoCobranca      = require('../controllers/montaTelaPosicaoCobranca')
+const validaPeriodo                = require('../midwares/validaPeriodo')
+const montaTelaPosicaoCobrancaLista = require('../controllers/montaTelaPosicaoCobrancaLista')
+
+
 //const { JSONCookie } = require('cookie-parser')
 
 const router                  = express.Router()
 
-require('dotenv').config()
+//require('dotenv').config()
 
 
 // Verifica se está autenticado
@@ -47,7 +52,7 @@ router.post('/login/check', setCredencialCargas,  checkLogin )
 router.get('/posicaocarga', chacaLogado , montaTelaPosicaoCarga )
 
 // CHECK - Posição da Carga API
-router.post('/posicaocarga/lista', chacaLogado , montaTelaPosicaoCargaLista )
+router.post('/posicaocarga/lista', chacaLogado , validaPeriodo , montaTelaPosicaoCargaLista )
 
 // SHOW - Resultado Posição de Carga API
 router.get('/posicaocarga/ctrc', montaTelaCTRC )
@@ -60,5 +65,12 @@ router.get('/posicaocarga/download/xml', downloadXML )
 
 // DOWNLOAD - COMPROVANTE - Usa WS Easydocs
 router.get('/posicaocarga/download/easydocs', downloadEaseDocs )
+
+// FORM - Posição da Carga API
+router.get('/posicaocobranca', chacaLogado , montaTelaPosicaoCobranca )
+
+// CHECK - Posição da Carga API
+router.post('/posicaocobranca/lista', chacaLogado , validaPeriodo, montaTelaPosicaoCobrancaLista )
+
 
 module.exports = router

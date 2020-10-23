@@ -1,5 +1,7 @@
 const getToken = require('../auth/getToken')
 
+require('dotenv').config()
+
 const checkLogin = (req, res, next ) => {
     
     let { cnpj, pwd } = req.body
@@ -35,12 +37,14 @@ const checkLogin = (req, res, next ) => {
 
                 let { code,address,port } = ret.err
 
-                console.log( 'ACESSO:',code,address,port )
+                let ambiente = process.env.NODE_ENV
+                let acesso = 'Acesso:'+ambiente+', Cód: "'+code+'" / '+address+':'+port
+                console.log( acesso )
 
                 if (code =='ECONNREFUSED') {
-                    req.flash('msg_warning', `Servidor [${address}:${port}] não responde a requisição !!!!`)
+                    req.flash('msg_warning', `Servidor API - Não responde a requisição !!!! ( ${acesso} )`)
                 } else {
-                    req.flash('msg_danger', `Credênciais (${cnpj}/SENHA) fornecidas são invalidas !!!!`)
+                    req.flash('msg_danger', `Credênciais (${cnpj}/SENHA) fornecidas são invalidas !!!! ( ${acesso} )`)
                 }
                 res.redirect('/login')    
             } else {     
