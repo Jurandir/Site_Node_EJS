@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+    <%- include('../partials/msg'); %>
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>Cobrança/Fatura</h1>
+            <h5><%= empresa %></h5>
+                <!-- Linha 01 -->
+                <div class="row">
+                        <label for="E1_NUM" class="col-md-2 col-form-label text-md-right">Numero</label>
+                        <div class="col-md-2">
+                            <input type="text" readonly class="form-control" id="E1_NUM" name="E1_NUM" value="<%= E1_NUM %>" placeholder="Numero">
+                        </div>
+
+                        <label for="QUITADO" class="col-md-1 col-form-label text-md-right">Quitado</label>
+                        <div class="col-md-2">
+                            <input type="text" readonly class="form-control" id="QUITADO" name="QUITADO" value="<%= QUITADO %>" placeholder="Quitado">
+                        </div>
+
+                        <label for="E1_TIPO" class="col-md-1 col-form-label text-md-right">Tipo</label>
+                        <div class="col-md-2">
+                            <input type="text" readonly class="form-control" id="E1_TIPO" name="E1_TIPO" value="<%= E1_TIPO %>" placeholder="Tipo">
+                        </div>
+                </div>
+
+                <!-- Linha 02 -->
+                <div class="row">
+                    <label for="EA_PORTADO" class="col-md-2 col-form-label text-md-right">Agente</label>
+                    <div class="col-md-2">
+                        <input type="text" readonly class="form-control" id="EA_PORTADO" name="EA_PORTADO" value="<%= EA_PORTADO %>" placeholder="Portador">
+                    </div>
+
+                    <label for="E1_NUMBCO" class="col-md-1 col-form-label text-md-right">Boleto</label>
+                    <div class="col-md-2">
+                        <input type="text" readonly class="form-control" id="E1_NUMBCO" name="E1_NUMBCO" value="<%= E1_NUMBCO %>" placeholder="Boleto">
+                    </div>
+
+                    <label for="E1_VALOR" class="col-md-1 col-form-label text-md-right">Valor</label>
+                    <div class="col-md-2">
+                        <input type="text" readonly class="form-control" id="E1_VALOR" name="E1_VALOR" value="<%= E1_VALOR %>" placeholder="Valor">
+                    </div>
+                </div>
+
+                <!-- Linha 03 -->
+                <div class="row">
+                    <label for="E1_EMISSAO" class="col-md-2 col-form-label text-md-right">Emissão</label>
+                    <div class="col-md-2">
+                        <input type="text" readonly class="form-control" id="E1_EMISSAO" name="E1_EMISSAO" value="<%= E1_EMISSAO %>" placeholder="Emissão">
+                    </div>
+
+                    <label for="E1_VENCTO" class="col-md-1 col-form-label text-md-right">Vencimento</label>
+                    <div class="col-md-2">
+                        <input type="text" readonly class="form-control" id="E1_VENCTO" name="E1_VENCTO" value="<%= E1_VENCTO %>" placeholder="Vencimento">
+                    </div>
+
+                    <label for="E1_BAIXA" class="col-md-1 col-form-label text-md-right">Baixa</label>
+                    <div class="col-md-2">
+                        <input type="text" readonly class="form-control" id="E1_BAIXA" name="E1_BAIXA" value="<%= E1_BAIXA %>" placeholder="Baixa">
+                    </div>
+                </div>
+
+                <!-- FIM -->
+
+                <div class="row">
+                    <br>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                            <a href='/posicaocoberp'>   
+                                <input type="button" class="btn btn-block btn-primary" value="Nova Pesquisa">
+                            </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/posicaocarga/download/dcte?value=<%= 1 %>">
+                            <input type="button" class="btn btn-block btn-primary" value="BOLETO">
+                        </a>
+                    </div>
+
+                </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script>
+        window.history.pushState("", "", "/posicaocoberp/fatura")
+    </script>
+
+</body>
+</html>

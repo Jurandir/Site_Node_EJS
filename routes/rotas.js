@@ -16,8 +16,11 @@ const setCredencialCargas        = require('../midwares/setCredencialCargas')
 const chacaLogado                = require('../midwares/chacaLogado')
 
 const montaTelaPosicaoCobranca      = require('../controllers/montaTelaPosicaoCobranca')
-const validaPeriodo                = require('../midwares/validaPeriodo')
+const montaTelaPosicaoCobERP        = require('../controllers/montaTelaPosicaoCobERP')
+const validaPeriodo                 = require('../midwares/validaPeriodo')
 const montaTelaPosicaoCobrancaLista = require('../controllers/montaTelaPosicaoCobrancaLista')
+const montaTelaPosicaoCobERPlista   = require('../controllers/montaTelaPosicaoCobERPlista')
+const montaTelaPosicaoCobERPfatura  = require('../controllers/montaTelaPosicaoCobERPfatura')
 
 
 //const { JSONCookie } = require('cookie-parser')
@@ -66,11 +69,20 @@ router.get('/posicaocarga/download/xml', downloadXML )
 // DOWNLOAD - COMPROVANTE - Usa WS Easydocs
 router.get('/posicaocarga/download/easydocs', downloadEaseDocs )
 
-// FORM - Posição da Carga API
+// FORM - Posição da Cobrança (CARGAS) API
 router.get('/posicaocobranca', chacaLogado , montaTelaPosicaoCobranca )
 
-// CHECK - Posição da Carga API
+// CHECK - Posição da Cobrança lista (CARGAS) API
 router.post('/posicaocobranca/lista', chacaLogado , validaPeriodo, montaTelaPosicaoCobrancaLista )
+
+// FORM - Posição da Cobrança (ERP) API
+router.get('/posicaocoberp', chacaLogado , montaTelaPosicaoCobERP )
+
+// CHECK - Posição da Cobrança lista (ERP) API
+router.post('/posicaocoberp/lista', chacaLogado , validaPeriodo, montaTelaPosicaoCobERPlista )
+
+// CHECK - Posição da Cobrança - Detalhes da Fatura (ERP) API
+router.get('/posicaocoberp/fatura', montaTelaPosicaoCobERPfatura ) // tirado os cheks
 
 
 module.exports = router
