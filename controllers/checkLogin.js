@@ -70,6 +70,8 @@ const checkLogin = (req, res, next ) => {
         }).catch((err)=> {
             req.flash('msg_danger', 'Problemas com o acesso a API !!!!')
             console.log('ERROR :',err)
+            res.redirect('/home')
+
         })
     }
 }

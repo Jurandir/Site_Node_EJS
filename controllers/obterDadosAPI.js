@@ -25,7 +25,6 @@ const obterDadosAPI = (req, res, next ) => {
     getJsonDoc(cnpj,numero,serie,token)
         .then((ret)=>{
             if (ret.isErr) {
-                console.log('getJsonDoc:',ret)
                 req.flash('msg_danger', 'Erro na requisição a API !!!')
                 res.redirect('/documento')    
             } else {     
@@ -42,8 +41,8 @@ const obterDadosAPI = (req, res, next ) => {
         }).catch((err)=> {
             console.log('(ERRO) getJsonDoc:',err)
             req.flash('msg_danger', 'Problemas com o acesso a API !!!!')
+            res.redirect('/home')
         })
 }
 
 module.exports = obterDadosAPI
-

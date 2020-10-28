@@ -10,13 +10,10 @@ const montaTelaPosicaoCobrancaLista = (req, res, next ) => {
         .then((ret)=>{
             if (ret.isErr) {
                 req.flash('msg_danger', 'Erro na requisição a API !!!')
-                res.redirect('back')   
+                res.redirect('/home')  
             } else {     
                 let dados           = ret.dados
-
-                
-                console.log('ret:',ret)
-
+              
                 req.session.res_json = dados             
                 res.render('pages/posicaocobrancaresult', {
                     empresa: req.session.empresa,
@@ -26,6 +23,7 @@ const montaTelaPosicaoCobrancaLista = (req, res, next ) => {
         }).catch((err)=> {
             console.log('(ERROR) montaTelaPosicaoCobrancaLista :',err)
             req.flash('msg_danger', 'Problemas com o acesso a API !!!!')
+            res.redirect('/home')
         })
 }
 

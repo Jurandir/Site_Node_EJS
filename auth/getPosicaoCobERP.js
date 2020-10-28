@@ -1,12 +1,12 @@
 const axios = require('axios')
 
-const getPosicaoCargas = async (cnpj,quitado,data_ini,data_fim,token)  => {
+const getPosicaoCobERP = async (cnpj,quitado,data_ini,data_fim,token)  => {
   const url = process.env.URL_POSICAOCOBERP
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   }
 
-  params = {
+  let params = {
     "cnpj": cnpj,
     "dataini": data_ini,
     "datafin": data_fim
@@ -22,8 +22,8 @@ const getPosicaoCargas = async (cnpj,quitado,data_ini,data_fim,token)  => {
       let ret = await axios.post(url,  bodyParameters, config)
         return { dados : ret.data, isErr: false}
   } catch (err) { 
-        return {err, isErr: true, url: url };
+        return {err, isErr: true, url: url, params : bodyParameters };
   }
 }
 
-module.exports = getPosicaoCargas
+module.exports = getPosicaoCobERP

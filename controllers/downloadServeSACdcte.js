@@ -27,7 +27,6 @@ const downloadServeSACdcte = (req, res) => {
           file = `./downloads/DCTE_${ctrc}.ZIP`
 
           getDownload(download, file, () => {
-                console.log('done')
                 res.download(file)
           });
      

@@ -61,8 +61,6 @@ const getImageEasydocs = async (emp,num) => {
             "isErr": false
         }  
 
-        console.log('Retorno:',matchRetorno[1])
-
         if (matchRetorno[1] == 'false') {
             result.Imagem = ''
             result.Retorno = false

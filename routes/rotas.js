@@ -1,6 +1,7 @@
 const express                    = require('express')
 const login                      = require('../controllers/login')
 const logout                     = require('../controllers/logout')
+const home                       = require('../controllers/home')
 const checkLogin                 = require('../controllers/checkLogin') 
 const rootCheck                  = require('../controllers/rootCheck')
 const downloadEaseDocs           = require('../controllers/downloadEaseDocs')
@@ -32,6 +33,9 @@ const router                  = express.Router()
 
 // Verifica se está autenticado
 router.get('/', rootCheck ) 
+
+// Verifica se está autenticado
+router.get('/home', home ) 
 
 // FORM - Documento API
 router.get('/documento', montaTelaTesteAPI )
@@ -78,11 +82,11 @@ router.post('/posicaocobranca/lista', chacaLogado , validaPeriodo, montaTelaPosi
 // FORM - Posição da Cobrança (ERP) API
 router.get('/posicaocoberp', chacaLogado , montaTelaPosicaoCobERP )
 
-// CHECK - Posição da Cobrança lista (ERP) API
+// FORM LIST - Posição da Cobrança lista (ERP) API
 router.post('/posicaocoberp/lista', chacaLogado , validaPeriodo, montaTelaPosicaoCobERPlista )
 
-// CHECK - Posição da Cobrança - Detalhes da Fatura (ERP) API
-router.get('/posicaocoberp/fatura', montaTelaPosicaoCobERPfatura ) // tirado os cheks
+// FORM - Posição da Cobrança - Detalhes da Fatura (ERP) API
+router.get('/posicaocoberp/fatura', montaTelaPosicaoCobERPfatura ) // ( pegar dados de detalhes )
 
 
 module.exports = router

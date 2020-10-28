@@ -12,8 +12,15 @@
 
     <main>
         <div class="jumbotron">
-            <h1>Cobrança/Fatura</h1>
-            <h5><%= empresa %></h5>
+            <div class="row">
+                <div class="col-md-1">
+                    <a href="javascript:history.back();javascript:history.back()"><<<</a>
+                </div>
+                <div class="col-md-11">
+                    <h1>Cobrança/Fatura</h1>                    
+                    <h5><%= empresa %></h5>
+                </div>
+            </div>
                 <!-- Linha 01 -->
                 <div class="row">
                         <label for="E1_NUM" class="col-md-2 col-form-label text-md-right">Numero</label>
@@ -46,7 +53,7 @@
 
                     <label for="E1_VALOR" class="col-md-1 col-form-label text-md-right">Valor</label>
                     <div class="col-md-2">
-                        <input type="text" readonly class="form-control" id="E1_VALOR" name="E1_VALOR" value="<%= E1_VALOR %>" placeholder="Valor">
+                        <input type="text" readonly class="form-control" id="E1_VALOR" name="E1_VALOR" value="<%= NumberToReais(E1_VALOR) %>" placeholder="Valor">
                     </div>
                 </div>
 
@@ -54,22 +61,56 @@
                 <div class="row">
                     <label for="E1_EMISSAO" class="col-md-2 col-form-label text-md-right">Emissão</label>
                     <div class="col-md-2">
-                        <input type="text" readonly class="form-control" id="E1_EMISSAO" name="E1_EMISSAO" value="<%= E1_EMISSAO %>" placeholder="Emissão">
+                        <input type="text" readonly class="form-control" id="E1_EMISSAO" name="E1_EMISSAO" value="<%= ERPtoDT(E1_EMISSAO) %>" placeholder="Emissão">
                     </div>
 
                     <label for="E1_VENCTO" class="col-md-1 col-form-label text-md-right">Vencimento</label>
                     <div class="col-md-2">
-                        <input type="text" readonly class="form-control" id="E1_VENCTO" name="E1_VENCTO" value="<%= E1_VENCTO %>" placeholder="Vencimento">
+                        <input type="text" readonly class="form-control" id="E1_VENCTO" name="E1_VENCTO" value="<%= ERPtoDT(E1_VENCTO) %>" placeholder="Vencimento">
                     </div>
 
                     <label for="E1_BAIXA" class="col-md-1 col-form-label text-md-right">Baixa</label>
                     <div class="col-md-2">
-                        <input type="text" readonly class="form-control" id="E1_BAIXA" name="E1_BAIXA" value="<%= E1_BAIXA %>" placeholder="Baixa">
+                        <input type="text" readonly class="form-control" id="E1_BAIXA" name="E1_BAIXA" value="<%= ERPtoDT(E1_BAIXA) %>" placeholder="Baixa">
                     </div>
                 </div>
 
-                <!-- FIM -->
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="text-lg-center">Detalhamento (<%= resumo.QTDE %>) Itens</h5>
+                    </div>
+                </div>
 
+                <!-- GRID -->
+                <table class="table table-sm table-hover table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">Empresa</th>
+                        <th scope="col">Série</th>
+                        <th scope="col">CTRC</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">valor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <% dados.forEach(function(i){ %>
+                        
+                        <tr>
+                          <td class="td-sm"><%= i.EMPCODIGO %></td>
+                          <td class="td-sm"><%= i.SERIE %></td>
+                          <td class="td-sm"><%= i.CTRC %></td>
+                          <td class="td-sm"><%= ERPtoDT(i.DATADOC) %></td>
+                          <td class="td-sm"><%= NumberToReais(i.TOTFRETE) %></td>
+                        </tr>
+
+                        <% })%>
+                  
+                    </tbody>
+                  </table>
+    
                 <div class="row">
                     <br>
                 </div>
@@ -81,9 +122,11 @@
                             </a>
                     </div>
                     <div class="col-md-3">
-                        <a href="/posicaocarga/download/dcte?value=<%= 1 %>">
-                            <input type="button" class="btn btn-block btn-primary" value="BOLETO">
-                        </a>
+                         <%if (QUITADO=='SIM') { %>
+                            <input id="BTN_BOLETO" type="button" disabled class="btn btn-block btn-primary" onclick="geraBoleto();" value="BOLETO">
+                         <% } else { %>  
+                            <input id="BTN_BOLETO" type="button" class="btn btn-block btn-primary" onclick="geraBoleto();" value="BOLETO">
+                         <% } %>  
                     </div>
 
                 </div>
@@ -94,6 +137,14 @@
     <footer>
         <%- include('../partials/footer'); %>
     </footer>
+
+    <script>
+        function geraBoleto() {
+            let urlx = decodeURIComponent('<%= encodeURIComponent(urlBoleto) %>')
+            let newWindow = window.open( urlx ,"Buscando boleto no ERP","location=yes,height=500,width=500")
+            if (newWindow) return false
+        }
+    </script>
 
     <script>
         window.history.pushState("", "", "/posicaocoberp/fatura")

@@ -37,14 +37,14 @@
                   <% dados.forEach(function(i){ %>             
                       <tr>
                       <th class="th-sm" scope="row"><a href='/posicaocoberp/fatura?&dados=<%= JSON.stringify(i)%>'><%= i.E1_NUM%></a></th>
-                      <td class="td-sm"><%= i.E1_EMISSAO.substring(6,8)+'-'+i.E1_EMISSAO.substring(4,6)+'-'+i.E1_EMISSAO.substring(0,4) %></td>
-                      <td class="td-sm"><%= i.E1_VENCTO.substring(6,8)+'-'+i.E1_VENCTO.substring(4,6)+'-'+i.E1_VENCTO.substring(0,4) %></td>
+                      <td class="td-sm"><%= ERPtoDT(i.E1_EMISSAO) %></td>
+                      <td class="td-sm"><%= ERPtoDT(i.E1_VENCTO) %></td>
                       <% if (i.QUITADO=='SIM') { %>
-                        <td class="td-sm"><%= i.E1_BAIXA.substring(6,8)+'-'+i.E1_BAIXA.substring(4,6)+'-'+i.E1_BAIXA.substring(0,4) %></td>
+                        <td class="td-sm"><%= ERPtoDT(i.E1_BAIXA) %></td>
                       <% } else { %>
                         <td class="td-sm">-</td>
                       <% } %>' 
-                      <td class="td-sm"><%= i.E1_VALOR%></td>
+                      <td class="td-sm"><%= NumberToReais( i.E1_VALOR) %></td>
                       <td class="td-sm"><%= i.EA_PORTADO%></td>
                       <td class="td-sm"><%= i.E1_NUMBCO%></td>
                     </tr>
