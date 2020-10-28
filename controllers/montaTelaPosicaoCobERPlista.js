@@ -11,12 +11,11 @@ const montaTelaPosicaoCobERPlista = (req, res, next ) => {
     getPosicaoCobERP(cnpj,quitado,data_ini,data_fim,token) 
         .then((ret)=>{
             if (ret.isErr) {
+                console.log('pages/posicaocoberpresult (montaTelaPosicaoCobERPlista) ret:',ret)
                 req.flash('msg_danger', 'Erro na requisição a API !!!')
                 res.redirect('/home')   
             } else {     
                 let dados           = ret.dados
-                
-                console.log('pages/posicaocoberpresult (montaTelaPosicaoCobERPlista) ret:',ret)
 
                 req.session.res_json = dados             
                 res.render('pages/posicaocoberpresult', {

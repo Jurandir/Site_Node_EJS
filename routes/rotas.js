@@ -86,7 +86,7 @@ router.get('/posicaocoberp', chacaLogado , montaTelaPosicaoCobERP )
 router.post('/posicaocoberp/lista', chacaLogado , validaPeriodo, montaTelaPosicaoCobERPlista )
 
 // FORM - Posição da Cobrança - Detalhes da Fatura (ERP) API
-router.get('/posicaocoberp/fatura', montaTelaPosicaoCobERPfatura ) // ( pegar dados de detalhes )
+router.get('/posicaocoberp/fatura', chacaLogado,  montaTelaPosicaoCobERPfatura ) 
 
 
 module.exports = router
