@@ -11,7 +11,8 @@ const montaTelaPosicaoCargaLista = (req, res, next ) => {
                 res.redirect('/home')    
             } else {     
                 let dados           = ret.dados
-                req.session.res_json = dados             
+                req.session.res_json = dados 
+
                 res.render('pages/posicaocargaresult', {
                     empresa: req.session.empresa,
                     dados: dados

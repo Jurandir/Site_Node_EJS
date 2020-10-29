@@ -18,8 +18,6 @@ const downloadServeSACdcte = (req, res) => {
 
     getBaixarXML(credencial,empresa,serie,ctrc,iFatura ).then((resposta)=>{
 
-          console.log('getBaixarXML: $value=',resposta.return.$value)
-
           let arq = resposta.return.$value
           let file = arq.split('\\').join('/')
           let download = `${server}/${file}`
@@ -34,9 +32,8 @@ const downloadServeSACdcte = (req, res) => {
     
     }).catch((err)=>{
     
-            console.error('getBaixarXML:',err)
+            console.error('(ERRO) getBaixarXML:',err)
             req.flash('msg_info', 'Servidor:'+server+' : '+err)
-            console.log('ERRO:',err)
             res.redirect('/posicaocarga')
 
     })

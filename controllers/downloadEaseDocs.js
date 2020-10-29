@@ -28,7 +28,6 @@ const downloadEaseDocs = (req, res) => {
                         let arq         = `${path}/${fileName}.png`                  
                         let buff        = new Buffer.from(base64Str, 'base64')
                         fs.writeFileSync(arq , buff)
-                        console.log('FILE:',arq)
                         res.download(arq)
             } else {
                         req.flash('msg_warning', '(EasyDocs) - Sem retorno !!!!')

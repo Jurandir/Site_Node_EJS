@@ -1,1 +1,5 @@
 Pagina de Consumo da API - TERMACO / TESTES
+
+Melhorias:
+- Criar combo para selecionar empresa pele CNPJ
+- CRiar limpeza de arquivos de download ( TEMP )

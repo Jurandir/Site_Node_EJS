@@ -10,7 +10,12 @@ const getCredencialCNPJ = function(cnpj,senha) {
                 if(err) {
                     reject(err)
                 } else {
-                    resolve(result.return.credencial.$value)
+                    try {
+                       resolve(result.return.credencial.$value)
+                    } catch (err1) {
+                        reject({ mensagem: "Não Obteve credencias no ServiSAC !!!",err: err1})
+                    }
+
                 }    
             })
         })

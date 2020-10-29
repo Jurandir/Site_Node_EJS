@@ -15,7 +15,7 @@
     <header>
         <%- include('../partials/header'); %>
     </header>
-
+    <!-- posicaocargaresult -->
     <main>
         <div class="jumbotron">
             <h1>Posição de Carga</h1>
@@ -38,9 +38,9 @@
                       <tr>
                       <th class="th-sm" scope="row"><a href='/posicaocarga/ctrc?&dados=<%= JSON.stringify(i)%>'><%= i.CONHECIMENTO%></a></th>
                       <td class="td-sm"><%= i.DATA.substring(8,10)+'-'+i.DATA.substring(5,7)+'-'+i.DATA.substring(0,4) %></td>
-                      <td class="td-sm"><%= i.REMETENTE%></td>
-                      <td class="td-sm"><%= i.DESTINATARIO%></td>
-                      <td class="td-sm"><%= i.NF%></td>
+                      <td class="td-sm"><%= i.REMETENTE.substring(0,35) %></td>
+                      <td class="td-sm"><%= i.DESTINATARIO.substring(0,35) %></td>
+                      <td class="td-sm"><%= i.NF.substring(0,35) %> <%if (i.NF.length > 35) {%>...<% }%> </td>
                       <td class="td-sm"><%= i.TRECHO%></td>
                     </tr>
                   <% })%>
@@ -48,7 +48,7 @@
               </table>
               <div class="row">
                       <div class="col-3">
-                          <a href="/posicaocarga" class="btn btn-large btn-block btn-primary">Nova Pesquisa</a>
+                          <a href="/posicaocarga" class="btn btn-large btn-block btn-info">Nova Pesquisa</a>
                       </div>
               </div>
     </main>

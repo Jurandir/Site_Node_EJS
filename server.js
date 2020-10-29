@@ -52,5 +52,5 @@ const port = process.env.PORT || '5001'
 const modo = process.env.NODE_ENV || 'Developer'
 
 app.listen(port, function () {
-    console.log(`Servidor rodando na porta ${port} : Modo ${modo}`)
+    console.log(`Servidor WWWW - rodando na porta ${port} : Modo ${modo}`)
 })

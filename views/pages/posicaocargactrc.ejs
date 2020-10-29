@@ -29,10 +29,10 @@
                             <input type="text" readonly class="form-control" id="conhecimento" name="conhecimento" value="<%= CONHECIMENTO %>" placeholder="Conhecimento">
                         </div>
 
-                        <div class="col-md-2">
-                            <label class="text-md-right">Notas Fiscais</label>
+                        <div class="col-md-1">
+                            <label class="text-md-right">NFs</label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <input type="text" readonly class="form-control" id="NF" name="NF" value="<%= NF %>" placeholder="Notas Fiscais">
                         </div>
                 </div>
@@ -79,6 +79,26 @@
                     </div>
                 </div>
 
+                <!-- DAE -->
+                <div class="row">
+                    <label for="DAE_CODIGO" class="col-md-2 col-form-label text-md-right">DAE</label>
+                    <div class="col-md-3">
+                        <input type="text" readonly class="form-control" id="DAE_CODIGO" name="DAE_CODIGO" value="<%= DAE_CODIGO %>" placeholder="Não está no sistema">
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="DAE_BAIXA" class="text-md-right">DAE Baixa</label>
+                            </div>   
+                            <div class="col-md-8">
+                                <input type="text" readonly class="form-control" id="DAE_BAIXA" name="DAE_BAIXA" value="<%= DAE_BAIXA %>" placeholder="Em aberto no sistema">
+                            </div>    
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="row">
                     <br>
                 </div>
@@ -86,23 +106,35 @@
                 <div class="row">
                     <div class="col-md-3">
                             <a href='/posicaocarga'>   
-                                <input type="button" class="btn btn-block btn-primary" value="Nova Pesquisa">
+                                <input type="button" class="btn btn-block btn-info" value="Nova Pesquisa">
                             </a>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <a href="/posicaocarga/download/dcte?value=<%= CONHECIMENTO %>">
                             <input type="button" class="btn btn-block btn-primary" value="DCTE">
                         </a>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <a href="/posicaocarga/download/xml?value=<%= CONHECIMENTO %>">
                             <input type="button" class="btn btn-block btn-primary" value="XML">
                         </a>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <a href="/posicaocarga/download/easydocs?value=<%= CONHECIMENTO %>">
                             <input type="button" class="btn btn-block btn-primary" value="CT-e">
                         </a>    
+                    </div>
+
+                    <div class="col-md-2">
+                        <%if (DAE_CODIGO) { %> 
+                            <a target="_blank" rel="noopener noreferrer" href="http://www2.termaco.com.br/sicnovo/DAE/PDF/<%= DAE_IMPRESSO %>.PDF">
+                               <input type="button" class="btn btn-block btn-primary" value="DAE">
+                            </a>    
+                        <% } else { %>
+                            <a href="#" disabled >
+                                <input type="button" disabled class="btn btn-block btn-primary" value="DAE">
+                             </a>    
+                         <% } %>
                     </div>
 
                 </div>

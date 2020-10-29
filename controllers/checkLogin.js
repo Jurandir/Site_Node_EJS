@@ -39,6 +39,7 @@ const checkLogin = (req, res, next ) => {
 
                 let ambiente = process.env.NODE_ENV
                 let acesso = 'Acesso:'+ambiente+', Cód: "'+code+'" / '+address+':'+port
+                if ( code==undefined ) { acesso = 'Acesso:'+ambiente+' (Login ERRO)' }
                 console.log( acesso )
 
                 if (code =='ECONNREFUSED') {
