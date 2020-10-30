@@ -17,6 +17,11 @@ const montaTelaPosicaoCobERPfatura = (req, res) => {
     getPosicaoCobERPdetalhe(prefixo,fatura,tipo,token) 
         .then((ret)=>{
 
+            if (!ret.dados) {
+                // { err, isErr ,url , params }
+                req.flash('msg_danger', 'Requisição da API !!!, '+ret.err)
+                res.redirect('/home')
+            } else       
             if (ret.isErr) {
                 req.flash('msg_danger', 'Erro na requisição a API !!!')
                 res.redirect('/home')   
@@ -29,6 +34,11 @@ const montaTelaPosicaoCobERPfatura = (req, res) => {
                 itens.dados          = dados 
                 itens.resumo         = resumo
 
+                if (!resumo.QTDE) {
+                    console.log('montaTelaPosicaoCobERPfatura: (Resumo ERRO em "getPosicaoCobERPdetalhe")')
+                    itens.resumo.QTDE = 0
+                }
+
                 itens.ERPtoDT        = ERPtoDT
                 itens.NumberToReais  = NumberToReais
                 itens.urlBoleto      = urlBoleto
@@ -39,7 +49,6 @@ const montaTelaPosicaoCobERPfatura = (req, res) => {
             console.log('(ERROR) montaTelaPosicaoCobERPfatura :',err)
             req.flash('msg_danger', 'Problemas com o acesso a API !!!!')
             res.redirect('/home')
-
     })
 }
 

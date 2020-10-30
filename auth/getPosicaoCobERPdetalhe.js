@@ -13,10 +13,14 @@ const getPosicaoCobERPdetalhe = async (prefixo,fatura,tipo,token)  => {
   }
   
   try {       
-      let ret = await axios.post(url,  bodyParameters, config)
-        return { dados : ret.data.data, resumo : ret.data.resumo , isErr: false}
+        let ret = await axios.post(url,  bodyParameters, config)
+        if (ret.data.err) {
+           return {err: ret.data.err, isErr: true, url: url, params : bodyParameters }
+        } else {
+           return { dados : ret.data.data, resumo : ret.data.resumo , isErr: false, err: ret.data.err }
+        }
   } catch (err) { 
-        return {err, isErr: true, url: url, params : bodyParameters };
+        return {err, isErr: true, url: url, params : bodyParameters }
   }
 }
 

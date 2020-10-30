@@ -3,3 +3,26 @@ Pagina de Consumo da API - TERMACO / TESTES
 Melhorias:
 - Criar combo para selecionar empresa pele CNPJ
 - CRiar limpeza de arquivos de download ( TEMP )
+- Em  <!-- posicaocoberpfatura --> Quando Agente=CX1 não habilitar button BOLETO
+
+========== Usar pm2 no servidor NODE ===========
+-- Install
+$ npm install pm2@latest -g
+
+-- Renomear o processo
+pm2 start server.js --name web-sic
+
+-- Para iniciar um aplicativo no modo Cluster
+$ pm2 start server.js -i max
+
+-- Administração dos APPs
+$ pm2 restart server.js
+$ pm2 reload server.js
+$ pm2 stop server.js
+$ pm2 delete server.js
+
+-- Liste o status de todos os aplicativos gerenciados pelo PM2:
+$ pm2 [list|ls|status]
+
+-- Painel baseado em terminal
+$ pm2 monit

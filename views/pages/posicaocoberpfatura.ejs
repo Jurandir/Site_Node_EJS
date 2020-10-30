@@ -77,11 +77,14 @@
 
                 <br>
                 <br>
+
+                <%if (resumo.QTDE) { %>
                 <div class="row">
                     <div class="col-12">
                         <h5 class="text-lg-center">Detalhamento (<%= resumo.QTDE %>) Itens</h5>
                     </div>
                 </div>
+                <% } %>
 
                 <!-- GRID -->
                 <table class="table table-sm table-hover table-dark">
