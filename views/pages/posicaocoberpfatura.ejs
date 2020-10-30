@@ -113,7 +113,15 @@
                   
                     </tbody>
                   </table>
-    
+
+                  <%if (mensagem) { %>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="text-sm-center">(<%= mensagem %>)</p>
+                        </div>
+                    </div>
+                    <% } %>
+        
                 <div class="row">
                     <br>
                 </div>

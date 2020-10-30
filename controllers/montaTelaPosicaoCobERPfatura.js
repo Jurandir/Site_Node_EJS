@@ -14,13 +14,23 @@ const montaTelaPosicaoCobERPfatura = (req, res) => {
     let token     = req.cookies.token
     let urlBoleto = urlERPboleto(itens)
 
+    itens.dados          = [] 
+    itens.resumo         = {}
+    itens.resumo.QTDE    = 0
+    itens.ERPtoDT        = ERPtoDT
+    itens.NumberToReais  = NumberToReais
+    itens.urlBoleto      = urlBoleto
+    itens.mensagem       = ''
+
+
     getPosicaoCobERPdetalhe(prefixo,fatura,tipo,token) 
         .then((ret)=>{
 
             if (!ret.dados) {
-                // { err, isErr ,url , params }
-                req.flash('msg_danger', 'Requisição da API !!!, '+ret.err)
-                res.redirect('/home')
+                itens.mensagem = 'Requisição da API !!!, '+ret.err
+                req.flash('msg_danger', itens.mensagem)
+                res.render('pages/posicaocoberpfatura', itens )
+
             } else       
             if (ret.isErr) {
                 req.flash('msg_danger', 'Erro na requisição a API !!!')
