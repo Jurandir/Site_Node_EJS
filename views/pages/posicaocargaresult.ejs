@@ -36,7 +36,7 @@
                   <% dados.forEach(function(i){ %>
                     
                       <tr>
-                      <th class="th-sm" scope="row"><a href='/posicaocarga/ctrc?&dados=<%= JSON.stringify(i)%>'><%= i.CONHECIMENTO%></a></th>
+                      <th class="th-sm" scope="row"><a href='/posicaocarga/ctrc?&dados=<%=  Buffer.from( JSON.stringify(i)).toString("base64") %>'><%= i.CONHECIMENTO%></a></th>
                       <td class="td-sm"><%= i.DATA.substring(8,10)+'-'+i.DATA.substring(5,7)+'-'+i.DATA.substring(0,4) %></td>
                       <td class="td-sm"><%= i.REMETENTE.substring(0,30) %></td>
                       <td class="td-sm"><%= i.DESTINATARIO.substring(0,30) %></td>
