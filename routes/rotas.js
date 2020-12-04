@@ -4,7 +4,7 @@ const logout                     = require('../controllers/logout')
 const home                       = require('../controllers/home')
 const checkLogin                 = require('../controllers/checkLogin') 
 const rootCheck                  = require('../controllers/rootCheck')
-const downloadEaseDocs           = require('../controllers/downloadEaseDocs')
+const downloadComprovantes       = require('../controllers/downloadComprovantes')
 const downloadXML                = require('../controllers/downloadXML')
 const downloadServeSACdcte       = require('../controllers/downloadServeSACdcte')
 const montaTelaCTRC              = require('../controllers/montaTelaCTRC')
@@ -71,7 +71,7 @@ router.get('/posicaocarga/download/dcte',  downloadServeSACdcte )
 router.get('/posicaocarga/download/xml', downloadXML )
 
 // DOWNLOAD - COMPROVANTE - Usa WS Easydocs
-router.get('/posicaocarga/download/easydocs', downloadEaseDocs )
+router.get('/posicaocarga/download/easydocs', downloadComprovantes )
 
 // FORM - Posição da Cobrança (CARGAS) API
 router.get('/posicaocobranca', chacaLogado , montaTelaPosicaoCobranca )
