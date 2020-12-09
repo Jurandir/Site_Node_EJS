@@ -1,9 +1,5 @@
-
 const montaTelaCTRC = (req, res) => {
     const { dados }  = req.query
-
-    // 
-    
     try {
         if (dados) {
             var dados_decode = Buffer.from( dados ,"base64").toString("utf-8")
@@ -18,7 +14,6 @@ const montaTelaCTRC = (req, res) => {
         console.log('Dados:',dados)
         res.redirect('/home')
     }
-
 }
 
 module.exports = montaTelaCTRC

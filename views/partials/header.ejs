@@ -4,17 +4,38 @@
   
   <ul class="navbar-nav mr-auto">
 
-    <li class="nav-item">
-      <a class="nav-link" href="/posicaocarga">Posição da Carga</a>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-truck" aria-hidden="true" style="color:black"></i>
+        Posição de Carga
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+        <a class="dropdown-item" href="/posicaocarga">Período</a>
+        <a class="dropdown-item" href="/posicaocargadoc">Conhecimento</a>
+        <a class="dropdown-item" href="#">Nota Fiscal</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Tracking</a>
+      </div>
     </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="/posicaocoberp">Posição de Cobrança</a>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-usd" aria-hidden="true" style="color:black"></i>
+        Posição de Cobrança
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+        <a class="dropdown-item" href="/posicaocoberp">Período</a>
+        <a class="dropdown-item" href="#">Conhecimento</a>
+        <a class="dropdown-item" href="#">Nota Fiscal</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Tracking</a>
+      </div>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="/documento">Testar API</a>
     </li>
+
 
   </ul>
 </nav>

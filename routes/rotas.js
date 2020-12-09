@@ -22,7 +22,11 @@ const validaPeriodo                 = require('../midwares/validaPeriodo')
 const montaTelaPosicaoCobrancaLista = require('../controllers/montaTelaPosicaoCobrancaLista')
 const montaTelaPosicaoCobERPlista   = require('../controllers/montaTelaPosicaoCobERPlista')
 const montaTelaPosicaoCobERPfatura  = require('../controllers/montaTelaPosicaoCobERPfatura')
+const montaTelaPosicaoCargaDoc      = require('../controllers/montaTelaPosicaoCargaDoc')
+const preparaDadosCTRC              = require('../controllers/preparaDadosCTRC')
+const montaViewCTRC                 = require('../controllers/montaViewCTRC')
 
+// montaTelaPosicaoCargaDocVIEW
 
 //const { JSONCookie } = require('cookie-parser')
 
@@ -56,7 +60,9 @@ router.get('/login', login )
 router.post('/login/check', setCredencialCargas,  checkLogin )
 
 // FORM - Posição da Carga API
-router.get('/posicaocarga', chacaLogado , montaTelaPosicaoCarga )
+router.get( '/posicaocarga'    , chacaLogado , montaTelaPosicaoCarga )
+router.get( '/posicaocargadoc' , chacaLogado , montaTelaPosicaoCargaDoc )
+router.post('/posicaocargadoc' , chacaLogado , preparaDadosCTRC, montaViewCTRC )
 
 // CHECK - Posição da Carga API
 router.post('/posicaocarga/lista', chacaLogado , validaPeriodo , montaTelaPosicaoCargaLista )
