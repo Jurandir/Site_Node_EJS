@@ -6,6 +6,16 @@ const montaTelaPosicaoCobrancaLista = (req, res, next ) => {
     let cnpj    = req.session.cnpj
     let quitado = ''
 
+    req.session.data_ini = data_ini 
+    req.session.data_fim = data_fim
+
+    console.log('montaTelaPosicaoCobrancaLista:',data_ini,data_fim)
+
+    if(data_ini>data_fim) {
+        req.flash('msg_warning', 'Data final superior a data inicial !!!')
+        res.redirect('/posicaocoberp')  
+    }
+    
     getPosicaoCobranca(cnpj,quitado,data_ini,data_fim,token) 
         .then((ret)=>{
             if (ret.isErr) {

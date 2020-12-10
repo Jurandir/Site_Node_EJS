@@ -19,6 +19,8 @@ const checkLogin = (req, res, next ) => {
         req.session.cnpj = ''
         req.session.user = ''
         req.session.empresa = ''
+        req.session.num_nf = ''
+        req.session.cod_ctrc = ''
         req.session.data_ini = new Date()
         req.session.data_fim = new Date()
     

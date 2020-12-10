@@ -4,6 +4,14 @@ const montaTelaPosicaoCargaLista = (req, res, next ) => {
     const { data_ini, data_fim  } = req.body
     let token = req.cookies.token
 
+    req.session.data_ini = data_ini 
+    req.session.data_fim = data_fim
+    
+    if(data_ini>data_fim) {
+        req.flash('msg_warning', 'Data final superior a data inicial !!!')
+        res.redirect('/posicaocarga')  
+    }
+
     getPosicaoCargas(data_ini,data_fim,token) 
         .then((ret)=>{
             if (ret.isErr) {

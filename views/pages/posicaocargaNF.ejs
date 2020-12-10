@@ -9,23 +9,29 @@
     <header>
         <%- include('../partials/header'); %>
     </header>
-    <!-- posicaocargadoc -->
+    <!-- posicaocargaNF -->
 
     <main>
         <div class="jumbotron">
-            <h1>Posição da Carga - Conhecimento</h1>
+            <h1>Posição da Carga - Nota Fiscal</h1>
             <h5><%= empresa %></h5>
 
-            <form action="/posicaocargadoc" method="POST">
+            <form action="/posicaocarganf" method="POST">
                 <div class="form-group"> 
                     <div class="card-body">
                       
-                     <div class="form-group row">
-                            <label for="cod_ctrc" class="col-md-4 col-form-label text-md-right">CTRC</label>
+                        <div class="form-group row">
+                            <label for="cnpj" class="col-md-4 col-form-label text-md-right">CNPJ</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" required id="cod_ctrc" name="cod_ctrc" value="<%= cod_ctrc %>" placeholder="XXX-X-99999999">
+                                <input type="text" class="form-control" required id="cnpj" name="cnpj" value="<%= cnpj %>" placeholder="CNPJ">
                             </div>
-                     </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="num_nf" class="col-md-4 col-form-label text-md-right">Nota Fiscal</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" required id="num_nf" name="num_nf" value="<%= num_nf %>" placeholder="Numero da NF">
+                            </div>
+                        </div>
 
                     <div class="form-group row"></div>
 

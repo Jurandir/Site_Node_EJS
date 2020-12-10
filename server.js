@@ -39,7 +39,6 @@ app.use((req, res, next) => {
     res.locals.msg_warning   = req.flash("msg_warning")
     res.locals.empresa       = ''
     res.locals.login         = ''
-    res.locals.login         = ''
 
     next()
 })

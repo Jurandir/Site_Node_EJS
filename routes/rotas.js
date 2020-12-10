@@ -22,11 +22,22 @@ const validaPeriodo                 = require('../midwares/validaPeriodo')
 const montaTelaPosicaoCobrancaLista = require('../controllers/montaTelaPosicaoCobrancaLista')
 const montaTelaPosicaoCobERPlista   = require('../controllers/montaTelaPosicaoCobERPlista')
 const montaTelaPosicaoCobERPfatura  = require('../controllers/montaTelaPosicaoCobERPfatura')
+
 const montaTelaPosicaoCargaDoc      = require('../controllers/montaTelaPosicaoCargaDoc')
+
 const preparaDadosCTRC              = require('../controllers/preparaDadosCTRC')
 const montaViewCTRC                 = require('../controllers/montaViewCTRC')
 
-// montaTelaPosicaoCargaDocVIEW
+
+const montaTelaPosicaoCargaNF       = require('../controllers/montaTelaPosicaoCargaNF')
+const preparaDadosNF                = require('../controllers/preparaDadosNF')
+const montaViewNF                   = require('../controllers/montaViewNF')
+
+const montaTelaPosicaoCargaLote       = require('../controllers/montaTelaPosicaoCargaLote')
+const preparaDadosLote                = require('../controllers/preparaDadosLote')
+const montaViewLote                   = require('../controllers/montaViewLote')
+
+
 
 //const { JSONCookie } = require('cookie-parser')
 
@@ -59,10 +70,20 @@ router.get('/login', login )
 // CHECK - Login
 router.post('/login/check', setCredencialCargas,  checkLogin )
 
-// FORM - Posição da Carga API
+// FORM - Posição da Carga API - Periodo
 router.get( '/posicaocarga'    , chacaLogado , montaTelaPosicaoCarga )
+
+// FORM - Posição da Carga API - Conhecimento
 router.get( '/posicaocargadoc' , chacaLogado , montaTelaPosicaoCargaDoc )
 router.post('/posicaocargadoc' , chacaLogado , preparaDadosCTRC, montaViewCTRC )
+
+// FORM - Posição da Carga API - Nota Fiscal
+router.get( '/posicaocarganf' , chacaLogado , montaTelaPosicaoCargaNF )
+router.post('/posicaocarganf' , chacaLogado , preparaDadosNF, montaViewNF )
+
+// FORM - Posição da Carga API - Lotes de Nota Fiscal
+router.get( '/posicaocargalote' , chacaLogado , montaTelaPosicaoCargaLote )
+router.post('/posicaocargalote' , chacaLogado , preparaDadosLote, montaViewLote )
 
 // CHECK - Posição da Carga API
 router.post('/posicaocarga/lista', chacaLogado , validaPeriodo , montaTelaPosicaoCargaLista )
@@ -83,7 +104,7 @@ router.get('/posicaocarga/download/easydocs', downloadComprovantes )
 router.get('/posicaocobranca', chacaLogado , montaTelaPosicaoCobranca )
 
 // CHECK - Posição da Cobrança lista (CARGAS) API
-router.post('/posicaocobranca/lista', chacaLogado , validaPeriodo, montaTelaPosicaoCobrancaLista )
+router.post('/posicaocobranca/lista', chacaLogado , montaTelaPosicaoCobrancaLista ) //validaPeriodo ()midwere
 
 // FORM - Posição da Cobrança (ERP) API
 router.get('/posicaocoberp', chacaLogado , montaTelaPosicaoCobERP )
