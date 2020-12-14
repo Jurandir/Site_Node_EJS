@@ -5,6 +5,7 @@ const montaTelaCTRC = (req, res) => {
             var dados_decode = Buffer.from( dados ,"base64").toString("utf-8")
             var itens = JSON.parse( dados_decode )
             itens.empresa = req.session.empresa
+            itens.nova_pesquisa = '/posicaocarga'
             res.render('pages/posicaocargactrc', itens )
         } else {
             res.redirect('/home')

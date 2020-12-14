@@ -2,10 +2,11 @@ const getLote        = require('../auth/getLote')
 const formataListaNF = require('../tools/formataListaNF')
 
 const preparaDadosLote = (req, res, next ) => {
-    const { cnpj, list_nfs } = req.body
+    let { cnpj, list_nfs } = req.body
     let token = req.cookies.token
     let reg = /^[\d,?!]+$/
- 
+
+    list_nfs = list_nfs.trim()
 
     if (!list_nfs) {
         req.flash('msg_warning', 'Numero da NF, é de preenchimento obrigatório !!!')
@@ -24,24 +25,19 @@ const preparaDadosLote = (req, res, next ) => {
    
     let list_nfs1 = formataListaNF(list_nfs)
 
-    console.log('cnpj:',cnpj)
-    console.log('list_nfs1:',list_nfs1)
+    console.log('preparaDadosLote','cnpj:',cnpj)
+    console.log('preparaDadosLote','list_nfs1:',list_nfs1)
 
 
     req.session.list_nfs  = list_nfs1
 
     getLote(cnpj, list_nfs1, token) 
         .then((ret)=>{
-
-            console.log('RET:',ret)
-
-
             if (ret.isErr) {
                 req.flash('msg_danger', 'Erro na requisição a API !!!')
                 res.redirect('/posicaocargalote')    
             } else {     
-                let dados            = ret.dados[0]
-                req.session.res_json = dados 
+                req.session.res_json = ret.dados
                 next()
             }                  
         }).catch((err)=> {

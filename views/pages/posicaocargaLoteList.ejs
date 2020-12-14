@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+  <%- include('../partials/msg'); %>
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <!-- posicaocargaLoteList -->
+    <main>
+        <div class="jumbotron">
+            <h1>Posição de Carga - Notas Fiscais</h1>
+            <h5><%= empresa %></h5>
+
+            <table class="table table-sm table-hover table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Conhecimento</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">NF</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Volumes</th>
+                    <th scope="col">Chave NFe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% dados.forEach(function(i){ %>
+                    
+                      <tr>
+                      <th class="th-sm" scope="row"><a href='/posicaocargalotecrtc?&cod_ctrc=<%= i.DOCUMENTO  %>'><%= i.DOCUMENTO%></a></th>
+                      <td class="td-sm"><%= i.DATA.substring(8,10)+'-'+i.DATA.substring(5,7)+'-'+i.DATA.substring(0,4) %></td>
+                      <td class="td-sm"><%= i.NF.substring(0,35) %> <%if (i.NF.length > 35) {%>...<% }%> </td>
+                      <td class="td-sm"><%= i.VALOR %></td>
+                      <td class="td-sm"><%= i.VOLUME %></td>
+                      <td class="td-sm"><%= i.CHAVENFE%></td>
+                    </tr>
+                  <% })%>
+                </tbody>
+              </table>
+              <div class="row">
+                      <div class="col-3">
+                          <a href="/posicaocargalote" class="btn btn-large btn-block btn-info">Nova Pesquisa</a>
+                      </div>
+              </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+</html>

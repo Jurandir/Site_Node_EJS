@@ -1,5 +1,5 @@
 const formataListaNF = ( lista ) => {
-    let resultado = lista
+    let resultado = `${lista}`.trim()
     // tira virgulas antes e depois da string
     if(resultado[0]==',') {
         resultado = `${resultado}`.substr(1)

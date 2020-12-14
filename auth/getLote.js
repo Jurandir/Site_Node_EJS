@@ -11,7 +11,7 @@ const getLote = async ( cnpj, list_nfs, token )  => {
   }
 
 
-  console.log('URL:',url)
+  console.log('getLote','URL:',url)
 
 
   try {       
