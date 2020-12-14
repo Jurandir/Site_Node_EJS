@@ -25,10 +25,6 @@ const preparaDadosLote = (req, res, next ) => {
    
     let list_nfs1 = formataListaNF(list_nfs)
 
-    console.log('preparaDadosLote','cnpj:',cnpj)
-    console.log('preparaDadosLote','list_nfs1:',list_nfs1)
-
-
     req.session.list_nfs  = list_nfs1
 
     getLote(cnpj, list_nfs1, token) 

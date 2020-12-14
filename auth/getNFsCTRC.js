@@ -1,21 +1,20 @@
 const axios = require('axios')
 
-const getLote = async ( cnpj, list_nfs, token )  => {
-  const url = process.env.URL_DADOSLOTENF
+const getNFsCTRC = async ( cod_ctrc, token )  => {
+  const url = process.env.URL_LISTANFCTRC
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   }
   const bodyParameters = {
-    cnpj: cnpj,
-    list_nfs: list_nfs
+    cod_ctrc: cod_ctrc
   }
 
   try {       
       let ret   = await axios.post(url,  bodyParameters, config)
       let isErr = (typeof(ret.erro)=='string') || false
-        return { dados : ret.data, isErr: isErr, rotina: "getLote" }
+        return { dados : ret.data, isErr: isErr, rotina: "getNFsCTRC" }
     } catch (err) { 
-        return {err, isErr: true, url: url ,rotina: "getLote"};
+        return {err, isErr: true, url: url, rotina: "getNFsCTRC" };
     }
 }
-module.exports = getLote
+module.exports = getNFsCTRC

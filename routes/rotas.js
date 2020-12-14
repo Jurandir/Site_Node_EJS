@@ -32,6 +32,7 @@ const montaViewCTRC                 = require('../controllers/montaViewCTRC')
 const montaTelaPosicaoCargaNF       = require('../controllers/montaTelaPosicaoCargaNF')
 const preparaDadosNF                = require('../controllers/preparaDadosNF')
 const montaViewNF                   = require('../controllers/montaViewNF')
+const preparaNFctrc                 = require('../controllers/preparaNFctrc')
 
 const montaTelaPosicaoCargaLote       = require('../controllers/montaTelaPosicaoCargaLote')
 const preparaDadosLote                = require('../controllers/preparaDadosLote')
@@ -81,6 +82,8 @@ router.post('/posicaocargadoc' , chacaLogado , preparaDadosCTRC, montaViewCTRC )
 // FORM - Posição da Carga API - Nota Fiscal
 router.get( '/posicaocarganf' , chacaLogado , montaTelaPosicaoCargaNF )
 router.post('/posicaocarganf' , chacaLogado , preparaDadosNF, montaViewNF )
+router.get( '/posicaocargalistanf' , chacaLogado , preparaNFctrc, montaViewLote )
+
 
 // FORM - Posição da Carga API - Lotes de Nota Fiscal
 router.get( '/posicaocargalote'   , chacaLogado , montaTelaPosicaoCargaLote )
