@@ -5,7 +5,13 @@ const urlERPboleto            = require('../tools/urlERPboleto')
 const montaTelaPosicaoCobERPfatura = (req, res) => {
     const { dados }  = req.query
 
-    var itens     = JSON.parse(dados)
+    var itens     = {}
+    var jsondados = JSON.parse(dados)
+    
+    if(jsondados){
+       itens     = JSON.parse(dados)
+    }
+
     itens.empresa = req.session.empresa
 
     let prefixo   = itens.E1_PREFIXO
