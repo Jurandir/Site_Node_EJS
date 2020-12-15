@@ -14,28 +14,29 @@
 
 <body class="container">
     <%- include('../partials/msg'); %>
-
-    <!-- login -->
-
+    <!-- admin -->
     <main>
         <div class="col d-flex justify-content-center">
         <div class="card text-center" style="width: 30rem;" aling="center">
-            <div class="row">
-                
-                    <img src="public/img/termacosic.png" alt="Termaco" class="center">
-                
+            <div class="row">                
+                <img src="public/img/termacosic.png" alt="Termaco" class="center">
             </div>
-            <form action="/login/check" method="POST">
+            <form id="formadmin" action="/admin/check" method="POST">
                 <div class="form-group"> 
                     <div class="card-body">
                     <div class="row">
                         <div class="col-md-12 form-group">
-                            <input type="number"  max="99999999999999" class="form-control" id="cnpj" name="cnpj" value="" placeholder="CNPJ ou CPF">
+                            <input type="number"  max="99999999999999" class="form-control" id="cliente" name="cliente" placeholder="CNPJ ou CPF do cliente">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 form-group">
-                            <input type="password" autocomplete=new-password maxlength="10" id="pwd" name="pwd" value="" placeholder="Entre com sua senha" class="form-control">
+                            <input type=text class="form-control" id="usuario" name="usuario" placeholder="Usuário local">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <input type=password autocomplete=new-password maxlength="10" id="senha" name="senha" placeholder="Entre com sua senha" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -49,11 +50,10 @@
         </div>	
         </div> 
     </main>
-
-    <div class="conteiner" style="width: 100%;text-align: center;position: fixed; bottom: 0; left: 0; padding-bottom: 30px;">
-            <a href='http://www2.termaco.com.br/sicnovo/sicsql/index.php'>SIC online - Versão anterior</a>   
-    </div>
-
-
+    <script>
+        setTimeout(()=>{
+            document.getElementById('senha').value=''
+        },100)
+    </script>
 </body>
 </html>    

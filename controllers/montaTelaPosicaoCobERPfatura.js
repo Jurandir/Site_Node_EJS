@@ -9,7 +9,7 @@ const montaTelaPosicaoCobERPfatura = (req, res) => {
     var jsondados = JSON.parse(dados)
     
     if(jsondados){
-       itens     = JSON.parse(dados)
+       itens     = jsondados
     }
 
     itens.empresa = req.session.empresa

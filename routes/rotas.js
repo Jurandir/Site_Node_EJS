@@ -1,5 +1,6 @@
 const express                    = require('express')
 const login                      = require('../controllers/login')
+const admin                      = require('../controllers/admin')
 const logout                     = require('../controllers/logout')
 const home                       = require('../controllers/home')
 const checkLogin                 = require('../controllers/checkLogin') 
@@ -68,6 +69,10 @@ router.get('/logout', logout )
 
 // FORM - Login
 router.get('/login', login )
+
+// FORM - Admin
+router.get('/admin', admin )
+
 
 // CHECK - Login
 router.post('/login/check', setCredencialCargas,  checkLogin )
