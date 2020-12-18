@@ -13,6 +13,8 @@ const checkLogin = (req, res, next ) => {
      } 
      
      let docs = JSON.parse( doc )
+
+     console.log('CNPJ:',cnpj)
      
     if (!cnpj) {
         req.session.auth = false

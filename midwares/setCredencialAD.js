@@ -1,6 +1,6 @@
 const getCredencialCNPJ       = require('../services/getCredencialCNPJ')
 
-const setCredencialCargas = (req, res, next ) => {
+const setCredencialAD = (req, res, next ) => {
     let { cnpj, pwd, usuario, senha } = req.body
 
     let cnpjTest = cnpj || '00000000000000'
@@ -13,7 +13,7 @@ const setCredencialCargas = (req, res, next ) => {
 
     }
 
-    getCredencialCNPJ(cnpjTest,pwd).then((credencial)=>{
+    getCredencialAD(cnpjTest,pwd).then((credencial)=>{
         res.cookie('chave',credencial, { maxAge: 900000, httpOnly: true })
         next()
     }).catch((err)=>{
@@ -23,4 +23,4 @@ const setCredencialCargas = (req, res, next ) => {
     })  
 }
    
-module.exports = setCredencialCargas
+module.exports = setCredencialAD
