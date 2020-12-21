@@ -4,6 +4,7 @@ const admin                      = require('../controllers/admin')
 const logout                     = require('../controllers/logout')
 const home                       = require('../controllers/home')
 const checkLogin                 = require('../controllers/checkLogin') 
+const checkAdmin                 = require('../controllers/checkAdmin') 
 const rootCheck                  = require('../controllers/rootCheck')
 const downloadComprovantes       = require('../controllers/downloadComprovantes')
 const downloadXML                = require('../controllers/downloadXML')
@@ -79,7 +80,7 @@ router.get('/admin', admin )
 router.post('/login/check', setCredencialCargas,  checkLogin )
 
 // CHECK - admin
-router.post('/admin/check', setCredencialAD,  checkLogin )  ///// <<<<<<<==========
+router.post('/admin/check', setCredencialAD,  checkAdmin )  ///// <<<<<<<==========
 
 
 // FORM - Posição da Carga API - Periodo
