@@ -12,6 +12,7 @@ const getJsonDoc = async (cnpj,numero,serie,token) => {
         let ret = await axios.post(url,  bodyParameters, config)
         return { dados : ret.data, isErr: false}
     } catch (err) { 
+        console.log(`Erro: ${err} - Params: ${cnpj},${numero},${serie} - Rotina : getJsonDoc`)
         return {err, isErr: true, url: url };
     }
 }

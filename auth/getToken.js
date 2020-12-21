@@ -10,6 +10,7 @@ const getToken = async (user,pwd) => {
         let ret = await axios.post(url,  bodyParameters)
         return { dados : ret.data, isAuthError: false}
     } catch (err) { 
+        console.log(`Erro: ${err} - Params: ${user}, ******* - Rotina : getToken`)
         return {err, isAuthError: true, url: url };
     }
 }

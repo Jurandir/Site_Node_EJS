@@ -15,6 +15,7 @@ const getLote = async ( cnpj, list_nfs, token )  => {
       let isErr = (typeof(ret.erro)=='string') || false
         return { dados : ret.data, isErr: isErr, rotina: "getLote" }
     } catch (err) { 
+        console.log(`Erro: ${err} - Params: ${cnpj},${list_nfs} - Rotina : getLote`)
         return {err, isErr: true, url: url ,rotina: "getLote"};
     }
 }

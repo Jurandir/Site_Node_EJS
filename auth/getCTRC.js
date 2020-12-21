@@ -18,6 +18,7 @@ const getCTRC = async ( empresa, serie, documento, token )  => {
       let isErr = (typeof(ret.erro)=='string') || false
         return { dados : ret.data, isErr: isErr }
     } catch (err) { 
+        console.log(`Erro: ${err} - Params: ${empresa},${serie},${documento} - Rotina : getCTRC`)
         return {err, isErr: true, url: url };
     }
 }

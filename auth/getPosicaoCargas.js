@@ -16,7 +16,8 @@ const getPosicaoCargas = async (data_ini,data_fim,token)  => {
       let ret = await axios.post(url,  bodyParameters, config)
         return { dados : ret.data, isErr: false}
     } catch (err) { 
-        return {err, isErr: true, url: url };
+      console.log(`Erro: ${err} - Params: ${data_ini},${data_fim} - Rotina : getPosicaoCargas`)
+      return {err, isErr: true, url: url };
     }
 }
 

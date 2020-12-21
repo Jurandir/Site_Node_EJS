@@ -14,6 +14,7 @@ const getNF = async ( cnpj, num_nf, token )  => {
       let isErr = (typeof(ret.erro)=='string') || false
         return { dados : ret.data, isErr: isErr }
     } catch (err) { 
+        console.log(`Erro: ${err} - Params: ${cnpj},${num_nf} - Rotina : getNF`)
         return {err, isErr: true, url: url };
     }
 }

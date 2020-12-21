@@ -22,6 +22,7 @@ const getPosicaoCobranca = async (cnpj,quitado,data_ini,data_fim,token)  => {
       let ret = await axios.post(url,  bodyParameters, config)
         return { dados : ret.data, isErr: false}
   } catch (err) { 
+        console.log(`Erro: ${err} - Params: ${cnpj},${data_ini},${data_fim} - Rotina : getPosicaoCobranca`)
         return {err, isErr: true, url: url, params : bodyParameters };
   }
 }

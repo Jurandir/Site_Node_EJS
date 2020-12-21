@@ -14,6 +14,7 @@ const getNFsCTRC = async ( cod_ctrc, token )  => {
       let isErr = (typeof(ret.erro)=='string') || false
         return { dados : ret.data, isErr: isErr, rotina: "getNFsCTRC" }
     } catch (err) { 
+        console.log(`Erro: ${err} - Params: ${cod_ctrc} - Rotina : getNFsCTRC`)
         return {err, isErr: true, url: url, rotina: "getNFsCTRC" };
     }
 }

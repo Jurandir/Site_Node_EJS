@@ -20,6 +20,7 @@ const getPosicaoCobERPdetalhe = async (prefixo,fatura,tipo,token)  => {
            return { dados : ret.data.data, resumo : ret.data.resumo , isErr: false, err: ret.data.err }
         }
   } catch (err) { 
+        console.log(`Erro: ${err} - Params: ${prefixo},${fatura},${tipo} - Rotina : getPosicaoCobERPdetalhe`)
         return {err, isErr: true, url: url, params : bodyParameters }
   }
 }
