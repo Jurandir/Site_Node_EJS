@@ -14,7 +14,8 @@ const checkLogin = (req, res, next ) => {
      
      let docs = JSON.parse( doc )
 
-     console.log('CNPJ:',cnpj)
+     req.session.url_login = '/login'
+     req.session.url_base  = '/posicaocarga'
      
     if (!cnpj) {
         req.session.auth = false
@@ -28,7 +29,7 @@ const checkLogin = (req, res, next ) => {
     
         req.session.res_json = 'Teste de texto'
         req.flash('msg_warning', 'Dados obrigatorios para acesso !!!!')
-        res.redirect('/login')    
+        res.redirect( req.session.url_login )    
     } else {
         req.session.auth    = true
         req.session.cnpj    = cnpj        
@@ -51,7 +52,7 @@ const checkLogin = (req, res, next ) => {
                 } else {
                     req.flash('msg_danger', `Credênciais (${cnpj}/SENHA) fornecidas são invalidas !!!! ( ${acesso} )`)
                 }
-                res.redirect('/login')    
+                res.redirect( req.session.url_login )    
             } else {     
 
                 let dados           = ret.dados
@@ -70,12 +71,12 @@ const checkLogin = (req, res, next ) => {
                 docs = `{"P1":"${cnpj}","P2":"${numero}","P3":"${serie}"}`
                 res.cookie('doc', docs)
 
-                res.redirect('/posicaocarga')
+                res.redirect( req.session.url_base )
             }            
         }).catch((err)=> {
             req.flash('msg_danger', 'Problemas com o acesso a API !!!!')
             console.log('ERROR :',err)
-            res.redirect('/home')
+            res.redirect( req.session.url_base )
 
         })
     }

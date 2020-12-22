@@ -1,24 +1,48 @@
 const getCredencialAD       = require('../services/getCredencialAD')
 
 const setCredencialAD = (req, res, next ) => {
-    let { cnpj, pwd, usuario, senha } = req.body
+   
+    console.log('req.body:',req.body)
 
-    let cnpjTest = cnpj || '00000000000000'
+    const utl_login                      = req.session.url_login || '/admin'
+    let { cliente, pwd, usuario, senha } = req.body
 
-    req.body.credencial = {}
+    req.session.credencial = {}
 
-    if (usuario) {
-        req.body.cnpj = cnpjTest
-        req.body.pwd  =  Buffer.from(`"${senha}"`).toString("base64") 
-        pwd = req.body.pwd
+    if (!usuario) {
+        req.session.auth = false
+        req.flash('msg_warning', 'Campo "Usuário local" obrigatorio para autenticação !!!!')
+        res.redirect( utl_login )    
     }
 
-    getCredencialAD(cnpjTest,usuario,pwd).then((credencial)=>{
+    req.body.cnpj = cliente || '00000000000000'
+    req.body.pwd  =  Buffer.from(`"${senha}"`).toString("base64") 
+    pwd = req.body.pwd
 
-        req.body.credencial = credencial
+    getCredencialAD(cliente,usuario,pwd).then((credencial)=>{
 
-        res.cookie('chave',credencial, { maxAge: 900000, httpOnly: true })
-        next()
+        req.session.credencial = credencial
+        let Err = credencial.Err || false
+
+
+
+        console.log('credencial:',credencial)
+        
+
+
+        if (Err) {
+
+            req.session.auth = false
+            req.flash('msg_warning', 'Credenciais fornecidas não são válidas !!!')
+            res.redirect( utl_login )        
+
+        } else {
+
+           res.cookie('chave',credencial, { maxAge: 900000, httpOnly: true })
+           next()
+
+        }
+
     }).catch((err)=>{
         console.log('ERRO: (setCredencialAD)',err)
         res.cookie('chave','Erro: '+err, { maxAge: 900000, httpOnly: true })

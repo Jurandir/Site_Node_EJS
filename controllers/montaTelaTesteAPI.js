@@ -1,11 +1,12 @@
 
 const montaTelaTesteAPI =  (req, res) => {
+    const url_login = req.session.url_login
 
     const { auth } = req.session
     if (!auth) {
         req.flash('msg_warning', 'Rediresionado - Usuário sem autenticação. !!!!')
         req.session.auth = false
-        res.redirect('/login')    
+        res.redirect( url_login )    
     } 
 
     const { doc }  = req.cookies

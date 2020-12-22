@@ -6,7 +6,7 @@ const logout = (req, res) => {
     res.clearCookie('user_sid')
     res.clearCookie('doc')
     req.flash('msg_info', 'Logout realizado com sucesso !!!!')
-    res.redirect('/login') 
+    res.redirect( req.session.url_login ) 
 }
 
 module.exports = logout

@@ -2,16 +2,18 @@ const getCteXML   = require('../auth/getCteXML')
 
 const downloadXML = (req, res) => {
     const { auth } = req.session
-    const url_base = '/posicaocarga'
+    const url_base = req.session.url_base 
+    const utl_login = req.session.url_login
 
     let { value } = req.query
 
     if (!auth) {
         req.session.auth = false
         req.flash('msg_warning', 'Ocorreu uma falha na autenticação !!!!')
-        res.redirect('/login')    
+        res.redirect( utl_login )    
     } 
    
+
     let empresa = value.substring(0,3)
     let serie   = value.substring(4,5)
     let ctrc    = value.substring(6,16)

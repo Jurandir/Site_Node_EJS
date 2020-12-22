@@ -90,6 +90,7 @@
                 <table class="table table-sm table-hover table-dark">
                     <thead>
                       <tr>
+                        <th scope="col">Conhecimento</th>
                         <th scope="col">Empresa</th>
                         <th scope="col">Série</th>
                         <th scope="col">CTRC</th>
@@ -102,6 +103,7 @@
                         <% dados.forEach(function(i){ %>
                         
                         <tr>
+                          <th class="td-sm" scope="row"><a href='/posicaocargalotecrtc?&cod_ctrc=<%= i.CONHECIMENTO  %>'><%= i.CONHECIMENTO%></a></th>
                           <td class="td-sm"><%= i.EMPCODIGO %></td>
                           <td class="td-sm"><%= i.SERIE %></td>
                           <td class="td-sm"><%= i.CTRC %></td>

@@ -2,12 +2,12 @@ const getJsonDoc = require('../auth/getJsonDoc')
 
 const obterDadosAPI = (req, res, next ) => {
     const { cnpj, numero, serie  } = req.body
-    const { auth } = req.session
+    const { auth, url_login } = req.session
 
     if (!auth) {
         req.session.auth = false
         req.flash('msg_warning', 'Ocorreu uma falha na autenticação !!!!')
-        res.redirect('/login')    
+        res.redirect( url_login )    
     } 
 
     if (!numero) {

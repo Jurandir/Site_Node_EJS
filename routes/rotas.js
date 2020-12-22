@@ -70,11 +70,10 @@ router.get('/resultado', montaTelaResultadoAPI )
 router.get('/logout', logout ) 
 
 // FORM - Login
-router.get('/login', login )
+router.get('/login'    , login )
 
 // FORM - Admin
 router.get('/admin', admin )
-
 
 // CHECK - Login
 router.post('/login/check', setCredencialCargas,  checkLogin )
