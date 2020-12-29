@@ -2,13 +2,6 @@ const getCliente = require("../auth/getCliente")
 
 const checkAdmin = (req, res, next ) => {
 
-   
-   
-    console.log(' **** req.body - checkAdmin : ',req.body)
-    console.log(' **** req.session - checkAdmin : ',req.session)
-
-
-    
     
     let { cnpj, pwd } = req.body
     let { doc }       = req.cookies
@@ -44,11 +37,6 @@ const checkAdmin = (req, res, next ) => {
 
     getCliente(cnpj,token).then((cliente)=>{
         
-        
-        
-        console.log('cliente:',cliente)
-
-
 
         req.session.cliente = cliente
         req.session.empresa = `${req.session.empresa} => ( ${cliente.dados.NOME} / ${cliente.dados.CNPJ} )`

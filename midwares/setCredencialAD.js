@@ -2,8 +2,6 @@ const getCredencialAD       = require('../services/getCredencialAD')
 
 const setCredencialAD = (req, res, next ) => {
    
-    console.log('req.body:',req.body)
-
     const utl_login                      = req.session.url_login || '/admin'
     let { cliente, pwd, usuario, senha } = req.body
 
@@ -23,11 +21,6 @@ const setCredencialAD = (req, res, next ) => {
 
         req.session.credencial = credencial
         let Err = credencial.Err || false
-
-
-
-        console.log('credencial:',credencial)
-        
 
 
         if (Err) {

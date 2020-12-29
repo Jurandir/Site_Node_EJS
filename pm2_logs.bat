@@ -1,0 +1,1 @@
+pm2 logs WWW-Termaco --lines 150

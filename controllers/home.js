@@ -21,10 +21,7 @@ const home = (req, res) => {
     try {
        
        
-        console.log('itens:',itens)
-
-
-       res.render('pages/home', itens )
+        res.render('pages/home', itens )
     } catch (err) {
         console.log('(ERRO) home.js : ',err)
         req.flash('msg_info', 'Entre novamente com suas credênciais !!!')
