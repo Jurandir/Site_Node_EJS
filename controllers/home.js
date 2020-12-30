@@ -10,7 +10,7 @@ const home = (req, res) => {
         "senha": cliente.dados.SENHA,
         "razao": cliente.dados.RAZAO,
         "cnpj": cliente.dados.CNPJ,
-        "ei": cliente.dados.IE,
+        "ie": cliente.dados.IE,
         "endereco": cliente.dados.ENDERECO,
         "numero": cliente.dados.NUMERO,
         "bairro": cliente.dados.BAIRRO,
