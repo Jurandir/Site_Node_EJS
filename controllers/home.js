@@ -1,5 +1,5 @@
 const home = (req, res) => {
-    const url_login = req.session.url_login
+    const url_login = req.session.url_login || '/login'
     var itens = {}
     
     let cliente = req.session.cliente

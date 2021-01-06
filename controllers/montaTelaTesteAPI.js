@@ -1,6 +1,6 @@
 
 const montaTelaTesteAPI =  (req, res) => {
-    const url_login = req.session.url_login
+    const url_login = req.session.url_login || '/login'
 
     const { auth } = req.session
     if (!auth) {

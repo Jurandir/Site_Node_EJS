@@ -2,8 +2,8 @@ const getCteXML   = require('../auth/getCteXML')
 
 const downloadXML = (req, res) => {
     const { auth } = req.session
-    const url_base = req.session.url_base 
-    const utl_login = req.session.url_login
+    const url_base = req.session.url_base   || '/home'
+    const utl_login = req.session.url_login || '/login'
 
     let { value } = req.query
 

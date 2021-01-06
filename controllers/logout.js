@@ -1,4 +1,5 @@
 const logout = (req, res) => {
+    const url_login = req.session.url_login || '/login'
     req.session.auth    = false
     req.session.cnpj    = ''
     req.session.user    = ''
