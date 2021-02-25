@@ -11,7 +11,7 @@ const downloadServeSACdcte = (req, res) => {
     let serie   = value.substring(4,5)
     let ctrc    = value.substring(6,16)
     let iFatura = 0
-    let server = process.env.CARGAS_DOWNLOAD || 'http://192.168.0.93:9091'
+    let server = process.env.CARGAS_DOWNLOAD || 'http://192.168.0.31:9091'
     let credencial = req.cookies.chave || '{1053E116-8BDE-4420-85AA-141792FF60CD}'
 
     console.log('Aguardando Servidor:',server,'....')
