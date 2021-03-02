@@ -24,35 +24,30 @@
                 </div>
                      
                 <div class="row">
-                        <label for="conhecimento" class="col-md-2 col-form-label text-md-right">Conhecimento</label>
-                        <div class="col-md-3">
-                            <input type="text" readonly class="form-control" id="conhecimento" name="conhecimento" value="<%= CONHECIMENTO %>" placeholder="Conhecimento">
-                        </div>
-
-                        <div class="col-md-1">
-                            <label class="text-md-right">NFs</label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" readonly class="form-control" id="NF" name="NF" value="<%= NF %>" placeholder="Não Informada!!!">
-                        </div>
-                        <div class="col-md-2">
-                            <a href="/posicaocargalistanf?cod_ctrc=<%= CONHECIMENTO %>">
-                                <input type="button" class="btn btn-block btn-secondary" value="Lista NFs">
-                            </a>
-                        </div>
-
+                            <label for="conhecimento" class="col-md-2 col-form-label text-md-right">Conhecimento</label>
+                            <div class="col-md-3">
+                                <input type="text" readonly class="form-control col-md-12" id="conhecimento" name="conhecimento" value="<%= CONHECIMENTO %>" placeholder="Conhecimento">
+                            </div>    
+                            <div class="col-md-2">
+                                <a href="/posicaocargalistanf?cod_ctrc=<%= CONHECIMENTO %>">
+                                    <input type="button" class="btn btn-block btn-success" value="Notas Fiscais">
+                                </a>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" readonly class="form-control" id="NF" name="NF" value="<%= NF %>" placeholder="Não Informada!!!">
+                            </div>
                 </div>
 
                 <div class="row">
                         <label for="remetente" class="col-md-2 col-form-label text-md-right">Remetente</label>
-                        <div class="col-md-9">
+                        <div class="col-md-10">
                             <input type="text" readonly class="form-control" id="remetente" name="remetente" value="<%= REMETENTE %>" placeholder="Remetente">
                         </div>
                 </div>
 
                 <div class="row">
                     <label for="destinatario" class="col-md-2 col-form-label text-md-right">Destinatário</label>
-                    <div class="col-md-9">
+                    <div class="col-md-10">
                         <input type="text" readonly class="form-control" id="destinatario" name="destinatario" value="<%= DESTINATARIO %>" placeholder="Destinatário">
                     </div>
                 </div>
@@ -64,9 +59,9 @@
                     </div>
 
                     <div class="col-md-2">
-                        <label class="text-md-right">Trecho</label>
+                        <label class="col-md-10 text-md-right">Trecho</label>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <input type="text" readonly class="form-control" id="trecho" name="trecho" value="<%= TRECHO %>" placeholder="Trecho">
                     </div>
                 </div>
@@ -80,7 +75,7 @@
 
                 <div class="row">
                     <label for="emissao" class="col-md-2 col-form-label text-md-right">Emissão</label>
-                    <div class="col-md-9">
+                    <div class="col-md-10">
                         <input type="text" readonly class="form-control" id="emissao" name="emissao" value="<%= DATA %>" placeholder="Emissão">
                     </div>
                 </div>
@@ -92,7 +87,7 @@
                         <input type="text" readonly class="form-control" id="DAE_CODIGO" name="DAE_CODIGO" value="<%= DAE_CODIGO %>" placeholder="Não está no sistema">
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="DAE_BAIXA" class="text-md-right">DAE Baixa</label>
@@ -131,7 +126,7 @@
                         </a>    
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <%if (DAE_CODIGO) { %> 
                             <a target="_blank" rel="noopener noreferrer" href="http://www2.termaco.com.br/sicnovo/DAE/PDF/<%= DAE_IMPRESSO %>.PDF">
                                <input type="button" class="btn btn-block btn-primary" value="DAE">
