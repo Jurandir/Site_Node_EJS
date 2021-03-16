@@ -25,7 +25,7 @@ const preparaNFctrc = (req, res, next ) => {
                 })
 
                 req.session.list_nfs = NFs.join(',')
-                req.session.cnpj     = cnpj
+                // req.session.cnpj     = cnpj // (11/03/2021)
 
                 req.session.res_json = dados 
                 next()

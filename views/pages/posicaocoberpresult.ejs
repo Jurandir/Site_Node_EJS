@@ -35,7 +35,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% dados.forEach(function(i){ %>             
+                  <% if(!dados1.err) { 
+                     dados1.forEach(function(i){ %>             
                       <tr>
                       <th class="th-sm" scope="row"><a href='/posicaocoberp/fatura?&dados=<%= JSON.stringify(i)%>'><%= i.E1_NUM%></a></th>
                       <td class="td-sm"><%= ERPtoDT(i.E1_EMISSAO) %></td>
@@ -49,7 +50,7 @@
                       <td class="td-sm"><%= i.EA_PORTADO%></td>
                       <td class="td-sm"><%= i.E1_NUMBCO%></td>
                     </tr>
-                  <% })%>
+                  <% }) }%>
                 </tbody>
               </table>
               <div class="row">

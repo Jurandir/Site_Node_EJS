@@ -16,6 +16,8 @@ const montaTelaPosicaoCobERPlista = (req, res, next ) => {
         res.redirect('/posicaocoberp')  
     }
 
+    console.log('montaTelaPosicaoCobERPlista CNPJ:',cnpj)
+
     getPosicaoCobERP(cnpj,quitado,data_ini,data_fim,token) 
         .then((ret)=>{
             if (ret.isErr) {
@@ -27,7 +29,7 @@ const montaTelaPosicaoCobERPlista = (req, res, next ) => {
                 req.session.res_json = dados             
                 res.render('pages/posicaocoberpresult', {
                     empresa: req.session.empresa,
-                    dados: dados,
+                    dados1: dados,
                     ERPtoDT: ERPtoDT,
                     NumberToReais: NumberToReais
                 })                

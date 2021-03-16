@@ -14,6 +14,7 @@ const montaTelaTesteAPI          = require('../controllers/montaTelaTesteAPI')
 const obterDadosAPI              = require('../controllers/obterDadosAPI')
 const montaTelaResultadoAPI      = require('../controllers/montaTelaResultadoAPI')
 const montaTelaPosicaoCarga      = require('../controllers/montaTelaPosicaoCarga')
+const montaTelaStatusCarga       = require('../controllers/montaTelaStatusCarga')
 const montaTelaPosicaoCargaLista = require('../controllers/montaTelaPosicaoCargaLista')
 const setCredencialCargas        = require('../midwares/setCredencialCargas')
 const setCredencialAD            = require('../midwares/setCredencialAD')
@@ -84,6 +85,7 @@ router.post('/admin/check', setCredencialAD,  checkAdmin )  ///// <<<<<<<=======
 
 // FORM - Posição da Carga API - Periodo
 router.get( '/posicaocarga'    , chacaLogado , montaTelaPosicaoCarga )
+router.get( '/statuscarga'     , chacaLogado , montaTelaStatusCarga )
 
 // FORM - Posição da Carga API - Conhecimento
 router.get( '/posicaocargadoc' , chacaLogado , montaTelaPosicaoCargaDoc )

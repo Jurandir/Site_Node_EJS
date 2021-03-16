@@ -1,17 +1,23 @@
 const axios         = require('axios')
 
-const loadAPI = async (method,endpoint,server,params) => {
-
-    const config = {
+const loadAPI = async (method,endpoint,server,params,token) => {
+    let url = server + endpoint
+    let config = {
         headers: { "Content-Type": 'application/json' }
     }
-    let url = server + endpoint
+
+    if (token) {
+        config = {
+            headers: { "Content-Type": 'application/json', Authorization: `Bearer ${token}` },
+        }
+    }
 
     try {       
         if (method=='POST') {
             ret = await axios.post( url, params, config )
         } else {
-            ret = await axios.get( url, { params }, config )
+            config.params = params
+            ret = await axios.get( url, config )
         }   
 
         return { dados : ret.data, isErr: false, isAxiosError: ret.isAxiosError || false }

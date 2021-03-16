@@ -34,7 +34,7 @@ const obterDadosAPI = (req, res, next ) => {
 
                 let docs = `{"P1":"${cnpj}","P2":"${numero}","P3":"${serie}"}`
                 res.cookie('doc', docs)
-                req.session.cnpj = cnpj
+                // req.session.cnpj = cnpj  // (11/03/2021)
                 res.redirect('/resultado')           
 
             }            

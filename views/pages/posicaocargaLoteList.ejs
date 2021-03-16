@@ -36,7 +36,7 @@
                       <td class="td-sm"><%= i.NF.substring(0,35) %> <%if (i.NF.length > 35) {%>...<% }%> </td>
                       <td class="td-sm"><%= i.VALOR %></td>
                       <td class="td-sm"><%= i.VOLUME %></td>
-                      <td class="td-sm"><%= i.CHAVENFE %></td>
+                      <td class="td-sm"><a href='/statuscarga?NFE=<%= i.CHAVENFE %>''><%= i.CHAVENFE %></a></td>
                       <td class="td-sm"><%= i.EMITENTE_NFE %></td>
                     </tr>
                   <% })%>
