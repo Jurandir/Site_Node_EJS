@@ -17,15 +17,33 @@
     </header>
     <!-- posicaocargaresult -->
     <main>
-        <div class="jumbotron">
-            <h1>Posição de Carga</h1>
-            <h5><%= empresa %></h5>
+      <div class="jumbotron">
+          <div class="row">
+
+                <div class="col-md-8">
+                    <h1>Posição de Carga</h1>
+                    <h5><%= empresa %></h5>
+                </div>
+                
+                <div class="col-md-4">
+                  <% if(dados.gerou_xls) { %>
+                    <h6>OBS: Maximo 300 linhas.</h6>
+                    <a href='<%= dados.xls.download %>'>Download Excel XLS</a>
+                  <% } %>
+                  <div class="row">&nbsp;</div>
+                   <a href="/posicaocarga" class="btn btn-large btn-block btn-info">Nova Pesquisa</a>
+                </div> 
+
+          </div>
+        </div>
+
 
             <table class="table table-sm table-hover table-dark">
                 <thead>
                   <tr>
                     <th scope="col">Conhecimento</th>
                     <th scope="col">Data</th>
+                    <th scope="col">Entrega</th>
                     <th scope="col">Remetente</th>
                     <th scope="col">Destinatario</th>
                     <th scope="col">NF</th>
@@ -38,6 +56,11 @@
                       <tr>
                       <th class="th-sm" scope="row"><a href='/posicaocarga/ctrc?&dados=<%=  Buffer.from( JSON.stringify(i)).toString("base64") %>'><%= i.CONHECIMENTO%></a></th>
                       <td class="td-sm"><%= i.DATA.substring(8,10)+'-'+i.DATA.substring(5,7)+'-'+i.DATA.substring(0,4) %></td>
+                      <%if (i.DATAENTREGA) {%>
+                        <td class="td-sm"><%= i.DATAENTREGA.substring(8,10)+'-'+i.DATAENTREGA.substring(5,7)+'-'+i.DATAENTREGA.substring(0,4) %></td>
+                      <% } else { %>
+                        <td class="td-sm"> - </td>
+                      <% } %>
                       <td class="td-sm"><%= i.REMETENTE.substring(0,30) %></td>
                       <td class="td-sm"><%= i.DESTINATARIO.substring(0,30) %></td>
                       <%if (i.NF) {%>
@@ -50,11 +73,6 @@
                   <% })%>
                 </tbody>
               </table>
-              <div class="row">
-                      <div class="col-3">
-                          <a href="/posicaocarga" class="btn btn-large btn-block btn-info">Nova Pesquisa</a>
-                      </div>
-              </div>
     </main>
 
     <footer>

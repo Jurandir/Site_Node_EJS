@@ -1,6 +1,7 @@
+const url =  process.env.URL_POSICAOCARGA+'STATUS'
 const getCTRC = require('../auth/getCTRC')
 
-const montaViewLoteCRTC = (req, res) => {
+const montaViewLoteCRTC = async (req, res) => {
     let { cod_ctrc } = req.query
     let token = req.cookies.token
     let itens = {}
@@ -25,7 +26,7 @@ const montaViewLoteCRTC = (req, res) => {
     req.session.cod_ctrc = cod_ctrc
 
     getCTRC(empresa, serie, numero, token) 
-        .then((ret)=>{
+        .then(async (ret)=>{
             if (ret.isErr) {
                 req.flash('msg_danger', 'Erro na requisição a API !!!')
                 res.redirect('/posicaocargalote')    
@@ -36,6 +37,9 @@ const montaViewLoteCRTC = (req, res) => {
                 req.session.res_json = ret.dados[0]
                 itens.nova_pesquisa = '/posicaocargalote'
 
+                let statusAPI = await loadAPI('GET','',url,{ ctrc: itens.CONHECIMENTO })
+                itens.STATUS = statusAPI.dados.status
+  
                 res.render('pages/posicaocargactrc', itens )
             }                  
         }).catch((err)=> {

@@ -10,8 +10,6 @@ const montaViewLote = (req, res) => {
         itens.cnpj    = req.session.cnpj
         itens.dados   = dados
 
-        console.log('ITENS:',itens)
-
         res.render('pages/posicaocargaLoteList', itens )
     }
 }

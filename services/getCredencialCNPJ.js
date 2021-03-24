@@ -6,6 +6,9 @@ const url = process.env.CARGAS_SOAP_URL
 const getCredencialCNPJ = function(cnpj,senha) { 
     return new Promise( function(resolve, reject) {
         try {
+            
+            console.log('ServiSAC :','Login:', cnpj, 'Tentando obter credênciais...' )
+
             soap.createClient(url, function(err, client) {
                 client.efetuaLogin({ cliente: cnpj, senha: senha  }, function(err, result) {
                     if(err) {

@@ -1,4 +1,6 @@
-const montaTelaCTRC = (req, res) => {
+const url =  process.env.URL_POSICAOCARGA+'STATUS'
+
+const montaTelaCTRC = async (req, res) => {
     const { dados }  = req.query
     try {
         if (dados) {
@@ -6,6 +8,10 @@ const montaTelaCTRC = (req, res) => {
             var itens = JSON.parse( dados_decode )
             itens.empresa = req.session.empresa
             itens.nova_pesquisa = '/posicaocarga'
+            
+            let statusAPI = await loadAPI('GET','',url,{ ctrc: itens.CONHECIMENTO })
+            itens.STATUS = statusAPI.dados.status
+
             res.render('pages/posicaocargactrc', itens )
         } else {
             res.redirect('/home')

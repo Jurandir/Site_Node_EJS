@@ -1,5 +1,6 @@
 const loadAPI =  require('../services/loadAPI')   /// async (method,endpoint,server,params)
 const url_jsondoc = process.env.URL_JSONDOC
+const url =  process.env.URL_POSICAOCARGA+'STATUS'
 
 const montaTelaStatusCarga = async(req, res) => {
     const {NFE} = req.query
@@ -12,6 +13,9 @@ const montaTelaStatusCarga = async(req, res) => {
     dados.nfe       = NFE
 
     let parse = await parseDadosAPI(dados)
+
+    let statusAPI = await loadAPI('GET','',url,{ ctrc: parse.conhecimento })
+    parse.STATUS = statusAPI.dados.status
 
     console.log('parse:',parse)
 

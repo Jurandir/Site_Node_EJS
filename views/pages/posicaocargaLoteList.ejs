@@ -12,9 +12,24 @@
     <!-- posicaocargaLoteList -->
     <main>
         <div class="jumbotron">
-            <h1>Posição de Carga - Notas Fiscais</h1>
-            <h5><%= empresa %></h5>
 
+          <div class="row">
+
+              <div class="col-md-8">
+                <h1>Posição de Carga - Notas Fiscais</h1>
+                <h5><%= empresa %></h5>
+              </div>
+              
+              <div class="col-md-4">
+                <div class="row">&nbsp;</div>
+                <a href="/posicaocargalote" class="btn btn-large btn-block btn-info">Nova Pesquisa</a>
+              </div> 
+
+           </div>
+
+        </div>
+
+        <div class="container">
             <table class="table table-sm table-hover table-dark">
                 <thead>
                   <tr>
@@ -42,11 +57,8 @@
                   <% })%>
                 </tbody>
               </table>
-              <div class="row">
-                      <div class="col-3">
-                          <a href="/posicaocargalote" class="btn btn-large btn-block btn-info">Nova Pesquisa</a>
-                      </div>
-              </div>
+        </div>
+        
     </main>
 
     <footer>
