@@ -42,6 +42,8 @@ const montaTelaPosicaoCargaLote       = require('../controllers/montaTelaPosicao
 const preparaDadosLote                = require('../controllers/preparaDadosLote')
 const montaViewLote                   = require('../controllers/montaViewLote')
 const montaViewLoteCRTC               = require('../controllers/montaViewLoteCRTC')
+const montaTelaMudaSenha              = require('../controllers/montaTelaMudaSenha')
+const mudaSenhaCheck                  = require('../controllers/mudaSenhaCheck')
 
 
 
@@ -81,6 +83,10 @@ router.post('/login/check', setCredencialCargas,  checkLogin )
 
 // CHECK - admin
 router.post('/admin/check', setCredencialAD,  checkAdmin )  ///// <<<<<<<==========
+
+// FORM - Mudança de senha 
+router.get( '/mudasenha'      , chacaLogado , montaTelaMudaSenha )
+router.post( '/mudasenhacheck' , chacaLogado , mudaSenhaCheck )
 
 
 // FORM - Posição da Carga API - Periodo

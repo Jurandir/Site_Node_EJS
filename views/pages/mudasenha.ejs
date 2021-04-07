@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+    <%- include('../partials/msg'); %>
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <!-- home -->
+    <main>
+        <div class="jumbotron">
+            <div>
+                <h1>Nova Senha</h1>
+                <h6><%= empresa %></h5>
+            </div>
+            <hr/>
+            <div>
+                <p>Obs: Senha numérica, maximo 8 digítos.</p>
+
+                <form action="/mudasenhacheck" method="POST">
+                    <div class="form-group"> 
+                        <div class="card-body">
+                          
+                         <div class="form-group row">
+                                <label for="senha" class="col-md-4 col-form-label text-md-right">Senha</label>
+                                <div class="col-md-3">
+                                    <input type="password" class="form-control" required id="senha" name="senha" value="" placeholder="Nova senha numérica">
+                                </div>
+                         </div>
+    
+                         <div class="form-group row">
+                                <label for="confirmacao" class="col-md-4 col-form-label text-md-right">Repete</label>
+                                <div class="col-md-3">
+                                    <input type="password" class="form-control" required id="confirmacao" name="confirmacao" value="" placeholder="Confirmação">
+                                </div>
+                        </div>
+       
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right"></label>
+                            <div class="col-md-3">
+                                <input type="submit" class="btn btn-block btn-success" value="Confirma">
+                            </div>
+                        </div>
+    
+                        </div>
+                    </div>
+                </form>                
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+</html>
