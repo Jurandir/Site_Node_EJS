@@ -66,7 +66,7 @@ async function parseDadosAPI(params) {
     const API_DADOS = params.dados
     console.log('API_DADOS:',API_DADOS)
     let ret = {
-        empresa: empresa,
+        empresa: params.empresa,
         conhecimento:        API_DADOS.conhecimento, 
 
         data_emissao:    formataData( API_DADOS.dataEmissao ),
