@@ -31,11 +31,14 @@ const montaTelaPosicaoCargaLista = async (req, res, next ) => {
                     dados.xls ={
                         data_ini: xls.dados.dataini,
                         data_fim: xls.dados.datafim,
-                        download: xls.dados.download
+                        download: xls.dados.download,
+                        maxLines: xls.dados.maxLines
                     }
                 } 
 
                 req.session.res_json = dados 
+
+                console.log('dados:',dados)
 
                 res.render('pages/posicaocargaresult', {
                     empresa: req.session.empresa,

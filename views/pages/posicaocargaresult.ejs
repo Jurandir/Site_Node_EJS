@@ -27,7 +27,7 @@
                 
                 <div class="col-md-4">
                   <% if(dados.gerou_xls) { %>
-                    <h6>OBS: Maximo 300 linhas.</h6>
+                    <h6>OBS: Maximo <%= `${dados.xls.maxLines}` %> linhas.</h6>
                     <a href='<%= dados.xls.download %>'>Download Excel XLS</a>
                   <% } %>
                   <div class="row">&nbsp;</div>
