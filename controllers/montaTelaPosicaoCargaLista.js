@@ -1,13 +1,16 @@
-const getPosicaoCargas     = require('../auth/getPosicaoCargas')
-const getPosicaoCargasXLS  = require('../auth/getPosicaoCargasXLS')
+const getPosicaoCargas      = require('../auth/getPosicaoCargas')
+const getPosicaoCargasXLS   = require('../auth/getPosicaoCargasXLS')
+const getListaDadosCTRCsXLS = require('../auth/getListaDadosCTRCsXLS')
 
 const montaTelaPosicaoCargaLista = async (req, res, next ) => {
     const {  gera_excel ,data_ini, data_fim  } = req.body
     let token = req.cookies.token
 
+    console.log('gera_excel:',gera_excel)
+
     req.session.data_ini   = data_ini 
     req.session.data_fim   = data_fim
-    req.session.gera_excel = gera_excel===undefined ? false : true
+    req.session.gera_excel = gera_excel==='option1' ? false : true
 
     if(data_ini>data_fim) {
         req.flash('msg_warning', 'Data final superior a data inicial !!!')
@@ -16,7 +19,11 @@ const montaTelaPosicaoCargaLista = async (req, res, next ) => {
     
     let xls 
     if(req.session.gera_excel){
-       xls = await getPosicaoCargasXLS(data_ini,data_fim,token) 
+        if( gera_excel==='option2') {
+            xls = await getPosicaoCargasXLS(data_ini,data_fim,token) 
+        } else {
+            xls = await getListaDadosCTRCsXLS(data_ini,data_fim,token) 
+        }
     }
 
     getPosicaoCargas(data_ini,data_fim,token) 
@@ -38,7 +45,7 @@ const montaTelaPosicaoCargaLista = async (req, res, next ) => {
 
                 req.session.res_json = dados 
 
-                console.log('dados:',dados)
+                // console.log('dados:',dados)
 
                 res.render('pages/posicaocargaresult', {
                     empresa: req.session.empresa,
