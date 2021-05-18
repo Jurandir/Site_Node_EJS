@@ -18,6 +18,9 @@ const montaTelaPosicaoCargaLista = async (req, res, next ) => {
     }
     
     let xls 
+
+    // console.log('-> montaTelaPosicaoCargaLista:',data_ini,data_fim)
+
     if(req.session.gera_excel){
         if( gera_excel==='option2') {
             xls = await getPosicaoCargasXLS(data_ini,data_fim,token) 

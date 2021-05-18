@@ -9,11 +9,13 @@ const getListaDadosCTRCsXLS = async (data_ini,data_fim,token)  => {
 
   const params = {
         DadosOuXlsx: "X",
-        dataini: data_ini,
-        datafim: data_fim
+        dt_inicial: data_ini,
+        dt_final: data_fim
     }
 
     config.params = params
+
+    // console.log('-> getListaDadosCTRCsXLS:',params)
 
     try {       
       let ret = await axios.get(url, config)
