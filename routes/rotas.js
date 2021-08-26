@@ -6,9 +6,11 @@ const home                       = require('../controllers/home')
 const checkLogin                 = require('../controllers/checkLogin') 
 const checkAdmin                 = require('../controllers/checkAdmin') 
 const rootCheck                  = require('../controllers/rootCheck')
-const downloadComprovantes       = require('../controllers/downloadComprovantes')
+// const downloadComprovantes       = require('../controllers/downloadComprovantes')
+const downloadSenior                  = require('../controllers/downloadSenior')
 const downloadXML                = require('../controllers/downloadXML')
-const downloadServeSACdcte       = require('../controllers/downloadServeSACdcte')
+// const downloadServeSACdcte       = require('../controllers/downloadServeSACdcte')
+const downloadeDocs              = require('../controllers/downloadeDocs')
 const montaTelaCTRC              = require('../controllers/montaTelaCTRC')
 const montaTelaTesteAPI          = require('../controllers/montaTelaTesteAPI')
 const obterDadosAPI              = require('../controllers/obterDadosAPI')
@@ -102,7 +104,6 @@ router.get( '/posicaocarganf' , chacaLogado , montaTelaPosicaoCargaNF )
 router.post('/posicaocarganf' , chacaLogado , preparaDadosNF, montaViewNF )
 router.get( '/posicaocargalistanf' , chacaLogado , preparaNFctrc, montaViewLote )
 
-
 // FORM - Posição da Carga API - Lotes de Nota Fiscal
 router.get( '/posicaocargalote'   , chacaLogado , montaTelaPosicaoCargaLote )
 router.post('/posicaocargalote'   , chacaLogado , preparaDadosLote, montaViewLote )
@@ -115,13 +116,16 @@ router.post('/posicaocarga/lista', chacaLogado , validaPeriodo , montaTelaPosica
 router.get('/posicaocarga/ctrc', montaTelaCTRC )
 
 // DOWNLOAD - DCTE - Usa ServeSAC Fortes
-router.get('/posicaocarga/download/dcte',  downloadServeSACdcte )
+// router.get('/posicaocarga/download/dcte',  downloadServeSACdcte )
+router.get('/posicaocarga/download/dcte',  downloadeDocs ) // 25.08.2021
+
 
 // DOWNLOAD - XML - Usa API Cliente
 router.get('/posicaocarga/download/xml', downloadXML )
 
 // DOWNLOAD - COMPROVANTE - Usa WS Easydocs
-router.get('/posicaocarga/download/easydocs', downloadComprovantes )
+// router.get('/posicaocarga/download/easydocs', downloadComprovantes )
+router.get('/posicaocarga/download/easydocs', downloadSenior )
 
 // FORM - Posição da Cobrança (CARGAS) API
 router.get('/posicaocobranca', chacaLogado , montaTelaPosicaoCobranca )

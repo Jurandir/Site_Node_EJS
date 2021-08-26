@@ -119,23 +119,42 @@
                             </a>
                     </div>
                     <div class="col-md-2">
-                        <a href="/posicaocarga/download/dcte?value=<%= CONHECIMENTO %>">
-                            <input type="button" class="btn btn-block btn-primary" value="DCTE">
-                        </a>
+                        <%if (CHAVECTE) { %> 
+                            <a href="/posicaocarga/download/dcte?value=<%= CHAVECTE %>">
+                                <input type="button" class="btn btn-block btn-primary" value="DCTE">
+                            </a>
+                        <% } else { %>
+                            <a href="#" disabled >
+                                <input type="button" disabled class="btn btn-block btn-primary" value="DCTE">
+                             </a>    
+                         <% } %>                            
+
                     </div>
                     <div class="col-md-2">
-                        <a href="/posicaocarga/download/xml?value=<%= CONHECIMENTO %>">
-                            <input type="button" class="btn btn-block btn-primary" value="XML">
-                        </a>
+                        <%if (CHAVECTE) { %> 
+                            <a href="/posicaocarga/download/xml?value=<%= CONHECIMENTO %>">
+                                <input type="button" class="btn btn-block btn-primary" value="XML">
+                            </a>
+                        <% } else { %>
+                            <a href="#" disabled >
+                                <input type="button" disabled class="btn btn-block btn-primary" value="XML">
+                             </a>    
+                         <% } %>                            
                     </div>
                     <div class="col-md-2">
-                        <a href="/posicaocarga/download/easydocs?value=<%= CONHECIMENTO %>">
-                            <input type="button" class="btn btn-block btn-primary" value="Comprovante">
-                        </a>    
-                    </div>
+                        <%if (CHAVECTE) { %> 
+                            <a href="/posicaocarga/download/easydocs?value=<%= CONHECIMENTO %>">
+                                <input type="button" class="btn btn-block btn-primary" value="Comprovante">
+                            </a>    
+                        <% } else { %>
+                            <a href="#" disabled >
+                                <input type="button" disabled class="btn btn-block btn-primary" value="Comprovante">
+                            </a>    
+                        <% } %>                            
+                        </div>
 
                     <div class="col-md-3">
-                        <%if (DAE_CODIGO) { %> 
+                        <%if (DAE_CODIGO && DAE_CODIGO != 'S/N' ) { %> 
                             <a target="_blank" rel="noopener noreferrer" href="http://www2.termaco.com.br/sicnovo/DAE/PDF/<%= DAE_IMPRESSO %>.PDF">
                                <input type="button" class="btn btn-block btn-primary" value="DAE">
                             </a>    

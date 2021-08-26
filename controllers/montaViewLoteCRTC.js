@@ -21,17 +21,27 @@ const montaViewLoteCRTC = async (req, res) => {
     // XXX-X-99999999
     let empresa   = `${cod_ctrc}`.substr(0,3)
     let serie     = `${cod_ctrc}`.substr(4,1)
-    let numero    = `${cod_ctrc}`.substr(6,10)    
+    let numero    = `${cod_ctrc}`.substr(6,10)  
+    
+    // console.log('==>',empresa,serie,numero)
 
     req.session.cod_ctrc = cod_ctrc
 
     getCTRC(empresa, serie, numero, token) 
         .then(async (ret)=>{
+            let len = ret.dados.length || 0
+            if (len <= 0) {
+                req.flash('msg_info', 'CTRC não localizada na base Sênior !!!')
+                res.redirect('/posicaocargalote')    
+            } else  
             if (ret.isErr) {
                 req.flash('msg_danger', 'Erro na requisição a API !!!')
                 res.redirect('/posicaocargalote')    
             } else { 
-                itens         = ret.dados[0]
+                // console.log('req.session:',req.session)
+                // console.log('req.session:',req.session.empresa)
+
+                itens         = ret.dados[0] || {}
                 itens.empresa = req.session.empresa
                 itens.cnpj    = req.session.cnpj
                 req.session.res_json = ret.dados[0]
